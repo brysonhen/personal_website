@@ -1,9 +1,60 @@
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    background-color: #0a0a0a;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  html::-webkit-scrollbar { display: none; }
+
+  body {
+    background-color: #0a0a0a;
+    color: #fafafa;
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  * { box-sizing: border-box; }
+
+  /* Kill Chrome's autofill background — force theme input color */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #262626 inset !important;
+    -webkit-text-fill-color: #fafafa !important;
+    caret-color: #fafafa;
+    transition: background-color 9999s ease-out 0s;
+  }
 }
 
-body {
-  font-family: system-ui, sans-serif;
+/* Grain texture — sits below the navbar (z-50) and loader (z-100) */
+#grain {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 300px 300px;
+}
+
+/* Scroll progress bar — switched from primary blue to neutral white */
+#progress-bar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 2px;
+  background: #fafafa;
+  z-index: 100;
+  transition: height 0.05s linear;
 }
