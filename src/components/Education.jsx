@@ -50,23 +50,6 @@ export default function Education() {
           </div>
         </div>
 
-        {/* Degree progress bar */}
-        <div className="mb-10">
-          <div className="flex items-baseline justify-between text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-2">
-            <span>Degree Progress</span>
-            <span className="text-foreground">75%</span>
-          </div>
-          <div className="h-1 bg-border rounded-full overflow-hidden">
-            <div className="h-full rounded-full bg-foreground" style={{ width: '75%', transition: 'width 1s ease' }} />
-          </div>
-          <div className="flex justify-between text-[10px] uppercase tracking-[1px] text-muted mt-1.5">
-            <span>2023</span>
-            <span>2024</span>
-            <span>2025</span>
-            <span>2026</span>
-            <span>2027</span>
-          </div>
-        </div>
 
         {/* Knowledge grid */}
         <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr] gap-8">

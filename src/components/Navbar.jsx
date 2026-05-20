@@ -26,7 +26,7 @@ export default function Navbar() {
   return (
     <nav
       style={{ transformOrigin: 'top center' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-bg/40 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         scrolled ? 'scale-90 -translate-y-1 opacity-95' : 'scale-100 translate-y-0 opacity-100'
       }`}
     >

@@ -99,15 +99,12 @@ export default function Skills() {
         >
           {categories.map(cat => (
             <div key={cat.title}>
-              {/* Compact category header */}
+              {/* Category header */}
               <div className="flex items-baseline gap-4 mb-3">
                 <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-muted shrink-0">
                   {cat.title}
                 </span>
                 <span className="flex-1 h-px bg-border" aria-hidden="true" />
-                <span className="text-[10px] font-semibold tabular-nums text-muted/60 shrink-0">
-                  {String(cat.skills.length).padStart(2, '0')}
-                </span>
               </div>
               {/* Denser grid: horizontal cards instead of square */}
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">

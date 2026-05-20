@@ -1,5 +1,5 @@
 import { ArrowUp, Mail } from 'lucide-react'
-import { GithubIcon, LinkedinIcon } from './Icons'
+import { GithubIcon, LinkedinIcon, InstagramIcon } from './Icons'
 
 const navLinks = [
   { href: '#about',      label: 'About' },
@@ -11,9 +11,10 @@ const navLinks = [
 ]
 
 const socials = [
-  { icon: GithubIcon,   href: 'https://github.com/brysonhen',           label: 'GitHub'   },
-  { icon: LinkedinIcon, href: 'https://linkedin.com/in/brysonhenderson/', label: 'LinkedIn' },
-  { icon: Mail,         href: 'mailto:bryshenders@gmail.com',           label: 'Email'    },
+  { icon: GithubIcon,    href: 'https://github.com/brysonhen',             label: 'GitHub'    },
+  { icon: LinkedinIcon,  href: 'https://linkedin.com/in/brysonhenderson/', label: 'LinkedIn'  },
+  { icon: InstagramIcon, href: 'https://www.instagram.com/brysonhende/',   label: 'Instagram' },
+  { icon: Mail,          href: 'mailto:bryshenders@gmail.com',             label: 'Email'     },
 ]
 
 export default function Footer() {
@@ -28,7 +29,7 @@ export default function Footer() {
               Bryson Henderson
             </div>
             <p className="text-sm text-muted leading-relaxed max-w-sm">
-              CS &amp; Data Science @ Ole Miss. Open to internships and opportunities — let&apos;s build something.
+              CS &amp; Data Science student at Ole Miss.
             </p>
           </div>
 

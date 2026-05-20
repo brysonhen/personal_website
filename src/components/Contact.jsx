@@ -2,15 +2,16 @@ import { useRef, useState } from 'react'
 import { Mail, Send, Download } from 'lucide-react'
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
-import { GithubIcon, LinkedinIcon } from './Icons'
+import { GithubIcon, LinkedinIcon, InstagramIcon } from './Icons'
 import { SectionHeading } from './About'
 import { RevealButton } from './ui/reveal-button'
 import { Input, Textarea } from './ui/textarea'
 
 const contactLinks = [
-  { icon: Mail,        label: 'Email',    value: 'bryshenders@gmail.com', copy: true },
-  { icon: LinkedinIcon,label: 'LinkedIn', value: 'brysonhenderson',       href: 'https://linkedin.com/in/brysonhenderson/' },
-  { icon: GithubIcon,  label: 'GitHub',   value: 'brysonhen',             href: 'https://github.com/brysonhen' },
+  { icon: Mail,         label: 'Email',     value: 'bryshenders@gmail.com', copy: true },
+  { icon: LinkedinIcon, label: 'LinkedIn',  value: 'brysonhenderson',       href: 'https://linkedin.com/in/brysonhenderson/' },
+  { icon: GithubIcon,   label: 'GitHub',    value: 'brysonhen',             href: 'https://github.com/brysonhen' },
+  { icon: InstagramIcon,label: 'Instagram', value: 'brysonhende',           href: 'https://www.instagram.com/brysonhende/' },
 ]
 
 // Contact card with the same GSAP circular clip-path reveal as the other reveal elements.
@@ -199,7 +200,9 @@ export default function Contact() {
                 isCopied={item.copy && copied}
               />
             ))}
-            <ResumeButton />
+            <div className="sm:col-span-2">
+              <ResumeButton />
+            </div>
           </div>
         </div>
 

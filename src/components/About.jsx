@@ -3,7 +3,6 @@ import { MapPin } from 'lucide-react'
 import { GithubIcon } from './Icons'
 import headshot from '../assets/headshot.png'
 import { RevealCardContainer } from './ui/animated-profile-card'
-import { useIsDark } from '../lib/use-is-dark'
 
 const GRAD_DATE = new Date('2027-05-15')
 
@@ -15,7 +14,7 @@ export function SectionHeading({ top, ghost, align = 'left' }) {
       <div className={`flex items-center gap-4 mb-5 ${isRight ? 'flex-row-reverse' : ''}`}>
         {ghost && (
           <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-muted shrink-0">
-            / {ghost}
+            {ghost}
           </span>
         )}
         <span className="flex-1 h-px bg-border" aria-hidden="true" />
@@ -47,13 +46,6 @@ function IntroBody({ inverted, daysLeft, unit, display, onToggle }) {
             <span className={`text-[15px] font-medium ${textValue}`}>Madison &amp; Oxford, MS</span>
           </div>
         </div>
-        <div className="flex items-center gap-3.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-cta shrink-0 animate-[pulse-dot_2s_ease_infinite]" style={{ boxShadow: dotShadow }} />
-          <div>
-            <span className={`block text-[10px] font-bold tracking-[1.5px] uppercase ${textMuted}`}>Status</span>
-            <span className={`text-[15px] font-medium ${textValue}`}>Open to opportunities</span>
-          </div>
-        </div>
         <button onClick={onToggle} className="flex items-center gap-3.5 cursor-pointer group/grad" type="button">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${textMuted} shrink-0`}><path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" /></svg>
           <div className="text-left">
@@ -69,10 +61,6 @@ function IntroBody({ inverted, daysLeft, unit, display, onToggle }) {
 export default function About() {
   const [daysLeft, setDaysLeft] = useState(null)
   const [showWeeks, setShowWeeks] = useState(false)
-  const isDark = useIsDark()
-  // GitHub chart swatch color flips with theme so squares contrast against the card
-  const chartBaseColor    = isDark ? 'fafafa' : '171717'
-  const chartOverlayColor = isDark ? '0a0a0a' : 'fafafa'
 
   useEffect(() => {
     setDaysLeft(Math.ceil((GRAD_DATE - Date.now()) / 86400000))
@@ -142,9 +130,11 @@ export default function About() {
                 </div>
                 {/* High-contrast container so empty cells (rendered at very low alpha)
                     show clearly against the dark card. Filter punches up the squares. */}
-                <div className="flex-grow rounded-xl bg-foreground/[0.22] p-3 flex overflow-hidden">
+                {/* Panel bg matches GitHub's empty-day color so empty cells blend
+                    into the bg (like github.com does it) and active cells pop. */}
+                <div className="flex-grow rounded-xl bg-[#ebedf0] p-3 flex overflow-hidden">
                   <img
-                    src={`https://ghchart.rshah.org/${chartBaseColor}/brysonhen`}
+                    src="https://ghchart.rshah.org/0d0d0d/brysonhen"
                     alt="GitHub contribution graph"
                     className="w-full h-full"
                     style={{ objectFit: 'fill' }}
@@ -165,9 +155,11 @@ export default function About() {
                   </a>
                 </div>
                 {/* Darker tinted bg so empty cells stand out against the dimmed-white card. */}
-                <div className="flex-grow rounded-xl bg-primary-foreground/[0.22] p-3 flex overflow-hidden">
+                {/* Same GitHub-style panel in the hover state — consistent regardless
+                    of card flip. The active squares stay clearly visible. */}
+                <div className="flex-grow rounded-xl bg-[#ebedf0] p-3 flex overflow-hidden">
                   <img
-                    src={`https://ghchart.rshah.org/${chartOverlayColor}/brysonhen`}
+                    src="https://ghchart.rshah.org/0d0d0d/brysonhen"
                     alt="GitHub contribution graph"
                     className="w-full h-full"
                     style={{ objectFit: 'fill' }}
