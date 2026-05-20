@@ -27,6 +27,40 @@ export function SectionHeading({ top, ghost, align = 'left' }) {
   )
 }
 
+// GitHub card body — identical structure between base and inverted so the
+// chart panel sits at the same position in both states (no shift on hover).
+function GithubBody({ inverted }) {
+  const headerMuted = inverted ? 'text-primary-foreground/70' : 'text-muted'
+  const headerIcon  = inverted ? 'text-primary-foreground'    : 'text-muted'
+  const linkBase    = inverted ? 'text-primary-foreground/80' : 'text-muted'
+  return (
+    <div className={`p-7 flex flex-col gap-4 h-full ${inverted ? 'bg-foreground/80' : 'bg-surface'}`}>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <GithubIcon size={16} className={headerIcon} />
+          <span className={`text-[10px] font-bold tracking-[1.5px] uppercase ${headerMuted}`}>Contributions</span>
+        </div>
+        <a
+          href="https://github.com/brysonhen"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`text-[12px] font-semibold transition-colors hover:opacity-100 ${linkBase}`}
+        >
+          View Profile →
+        </a>
+      </div>
+      <div className="flex-grow rounded-xl bg-[#ebedf0] p-3 flex overflow-hidden">
+        <img
+          src="https://ghchart.rshah.org/0d0d0d/brysonhen"
+          alt="GitHub contribution graph"
+          className="w-full h-full"
+          style={{ objectFit: 'fill' }}
+        />
+      </div>
+    </div>
+  )
+}
+
 // Intro card body — keeps the same layout for both base and inverted overlay
 function IntroBody({ inverted, daysLeft, unit, display, onToggle }) {
   const textBase   = inverted ? 'text-primary-foreground' : 'text-foreground'
@@ -122,51 +156,8 @@ export default function About() {
             accent="#262626"
             origin="0px 0px"
             className="w-full h-full rounded-[22px]"
-            base={
-              <div className="bg-surface p-7 flex flex-col gap-4 h-full">
-                <div className="flex items-center gap-2">
-                  <GithubIcon size={16} className="text-muted" />
-                  <span className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted">Contributions</span>
-                </div>
-                {/* High-contrast container so empty cells (rendered at very low alpha)
-                    show clearly against the dark card. Filter punches up the squares. */}
-                {/* Panel bg matches GitHub's empty-day color so empty cells blend
-                    into the bg (like github.com does it) and active cells pop. */}
-                <div className="flex-grow rounded-xl bg-[#ebedf0] p-3 flex overflow-hidden">
-                  <img
-                    src="https://ghchart.rshah.org/0d0d0d/brysonhen"
-                    alt="GitHub contribution graph"
-                    className="w-full h-full"
-                    style={{ objectFit: 'fill' }}
-                  />
-                </div>
-              </div>
-            }
-            overlay={
-              <div className="bg-foreground/80 p-7 flex flex-col gap-4 h-full">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <GithubIcon size={16} className="text-primary-foreground" />
-                    <span className="text-[10px] font-bold tracking-[1.5px] uppercase text-primary-foreground/70">Contributions</span>
-                  </div>
-                  <a href="https://github.com/brysonhen" target="_blank" rel="noopener noreferrer"
-                    className="text-[12px] font-semibold text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                    View Profile →
-                  </a>
-                </div>
-                {/* Darker tinted bg so empty cells stand out against the dimmed-white card. */}
-                {/* Same GitHub-style panel in the hover state — consistent regardless
-                    of card flip. The active squares stay clearly visible. */}
-                <div className="flex-grow rounded-xl bg-[#ebedf0] p-3 flex overflow-hidden">
-                  <img
-                    src="https://ghchart.rshah.org/0d0d0d/brysonhen"
-                    alt="GitHub contribution graph"
-                    className="w-full h-full"
-                    style={{ objectFit: 'fill' }}
-                  />
-                </div>
-              </div>
-            }
+            base={<GithubBody inverted={false} />}
+            overlay={<GithubBody inverted={true} />}
           />
         </div>
       </div>
