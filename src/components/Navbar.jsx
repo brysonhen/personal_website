@@ -26,15 +26,15 @@ export default function Navbar() {
   return (
     <nav
       style={{ transformOrigin: 'top center' }}
-      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-bg/40 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none ${
         scrolled ? 'scale-90 -translate-y-1 opacity-95' : 'scale-100 translate-y-0 opacity-100'
       }`}
     >
-      {/* Mobile hamburger */}
+      {/* Mobile hamburger — outside the pill, sits in the top-right corner */}
       <button
         type="button"
         onClick={() => setMobileOpen(v => !v)}
-        className="md:hidden absolute top-5 right-5 z-20 p-2"
+        className="md:hidden absolute top-5 right-5 z-20 p-2 pointer-events-auto backdrop-blur-md bg-bg/40 rounded-md"
         aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
       >
         <div className={`w-6 h-0.5 bg-foreground mb-1.5 transition-transform duration-300 ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`} />
@@ -44,11 +44,12 @@ export default function Navbar() {
 
       <div
         className={`
-          flex items-center justify-center w-full py-6
+          flex items-center justify-center w-full py-5
           ${mobileOpen ? 'flex' : 'hidden md:flex'}
         `}
       >
-        <ul className="flex flex-col items-center gap-4 md:flex-row md:gap-2 lg:gap-3">
+        {/* Only this pill gets the blur + bg — not the whole top bar */}
+        <ul className="pointer-events-auto flex flex-col items-center gap-4 rounded-full border border-border/60 bg-bg/40 backdrop-blur-md shadow-[0_4px_24px_-8px_rgba(0,0,0,0.4)] px-3 py-2 md:flex-row md:gap-1 lg:gap-2">
           {links.map(({ href, label }) => (
             <li key={href} className="list-none">
               <a
