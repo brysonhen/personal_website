@@ -1,12 +1,13 @@
 import { useEffect, useRef } from 'react'
 
-// Five layered waves in pure white at varying alpha — variety from opacity, no hue.
+// Five layered waves in pure white at varying alpha. Higher alphas + opacity
+// here than before so the lines actually pop on the dark Hero background.
 const WAVES = [
-  { offset: 0,             amplitude: 70, frequency: 0.0030, color: 'rgba(250,250,250,0.70)', opacity: 0.40 },
-  { offset: Math.PI / 2,   amplitude: 90, frequency: 0.0026, color: 'rgba(250,250,250,0.45)', opacity: 0.30 },
-  { offset: Math.PI,       amplitude: 60, frequency: 0.0034, color: 'rgba(250,250,250,0.30)', opacity: 0.25 },
-  { offset: Math.PI * 1.5, amplitude: 80, frequency: 0.0022, color: 'rgba(250,250,250,0.20)', opacity: 0.20 },
-  { offset: Math.PI * 2,   amplitude: 55, frequency: 0.0040, color: 'rgba(250,250,250,0.55)', opacity: 0.25 },
+  { offset: 0,             amplitude: 70, frequency: 0.0030, color: 'rgba(250,250,250,1.00)', opacity: 0.70 },
+  { offset: Math.PI / 2,   amplitude: 90, frequency: 0.0026, color: 'rgba(250,250,250,0.85)', opacity: 0.55 },
+  { offset: Math.PI,       amplitude: 60, frequency: 0.0034, color: 'rgba(250,250,250,0.65)', opacity: 0.45 },
+  { offset: Math.PI * 1.5, amplitude: 80, frequency: 0.0022, color: 'rgba(250,250,250,0.45)', opacity: 0.35 },
+  { offset: Math.PI * 2,   amplitude: 55, frequency: 0.0040, color: 'rgba(250,250,250,0.90)', opacity: 0.50 },
 ]
 
 const BG_COLOR = '#0a0a0a'
@@ -83,10 +84,10 @@ export default function CanvasWaves() {
         if (x === 0) ctx.moveTo(x, y)
         else ctx.lineTo(x, y)
       }
-      ctx.lineWidth = 2.5
+      ctx.lineWidth = 3
       ctx.strokeStyle = wave.color
       ctx.globalAlpha = wave.opacity
-      ctx.shadowBlur = 35
+      ctx.shadowBlur = 50
       ctx.shadowColor = wave.color
       ctx.stroke()
       ctx.restore()

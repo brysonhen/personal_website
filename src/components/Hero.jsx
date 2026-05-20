@@ -70,14 +70,6 @@ export default function Hero() {
           <TypingText />
         </motion.p>
 
-        {/* Stats row — flex-wrap with gap means separators never dangle on wrap */}
-        <motion.div variants={item} className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[11px] font-semibold tracking-[1.5px] uppercase text-muted mb-10">
-          <span>Ole Miss '27</span>
-          <span className="opacity-30" aria-hidden="true">·</span>
-          <span>GPA 3.54</span>
-          <span className="opacity-30" aria-hidden="true">·</span>
-          <span>Data Science</span>
-        </motion.div>
 
         {/* CTAs */}
         <motion.div variants={item} className="flex flex-wrap gap-3">

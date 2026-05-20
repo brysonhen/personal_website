@@ -34,7 +34,7 @@ function IntroBody({ inverted, daysLeft, unit, display, onToggle }) {
   const textValue  = inverted ? 'text-primary-foreground' : 'text-foreground'
   const dotShadow  = inverted ? '0 0 8px #16a34a' : '0 0 8px #22c55e'
   return (
-    <div className={`p-7 flex flex-col gap-6 h-full ${inverted ? 'bg-primary' : 'bg-surface'}`}>
+    <div className={`p-7 flex flex-col gap-6 h-full ${inverted ? 'bg-foreground/80' : 'bg-surface'}`}>
       <p className={`text-[17px] leading-[1.8] ${inverted ? 'text-primary-foreground/85' : 'text-foreground/80'}`}>
         I'm a junior at Ole Miss studying Computer Science with a Data Science emphasis. I love building things and solving problems, and I'm working toward a career in data science. Right now I'm looking for internships and opportunities where I can learn and actually make a difference.
       </p>
@@ -110,7 +110,7 @@ export default function About() {
               </div>
             }
             overlay={
-              <div className="bg-primary p-7 flex flex-col gap-4 h-full">
+              <div className="bg-foreground/80 p-7 flex flex-col gap-4 h-full">
                 <span className="text-[22px] font-bold tracking-tight text-primary-foreground">Get To Know Me</span>
                 <p className="text-[14px] leading-[1.75] text-primary-foreground/85">Outside of school and work, you'll usually find me at the gym, on the soccer field, or playing a video game. Video games are actually what got me into CS. On campus I'm involved with Delta Psi and the Coding Club.</p>
                 <div className="flex flex-wrap gap-2 mt-auto pt-2">
@@ -135,20 +135,20 @@ export default function About() {
                   <GithubIcon size={16} className="text-muted" />
                   <span className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted">Contributions</span>
                 </div>
-                {/* flex-grow container so the chart fills the bottom of the card.
-                    Subtle bg tint gives empty (no-contribution) cells contrast to read against. */}
-                <div className="flex-grow rounded-xl bg-foreground/[0.05] p-3 flex overflow-hidden">
+                {/* High-contrast container so empty cells (rendered at very low alpha)
+                    show clearly against the dark card. Filter punches up the squares. */}
+                <div className="flex-grow rounded-xl bg-foreground/[0.18] p-3 flex overflow-hidden">
                   <img
                     src="https://ghchart.rshah.org/fafafa/brysonhen"
                     alt="GitHub contribution graph"
                     className="w-full h-full"
-                    style={{ objectFit: 'fill' }}
+                    style={{ objectFit: 'fill', filter: 'contrast(1.3) brightness(1.15)' }}
                   />
                 </div>
               </div>
             }
             overlay={
-              <div className="bg-primary p-7 flex flex-col gap-4 h-full">
+              <div className="bg-foreground/80 p-7 flex flex-col gap-4 h-full">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <GithubIcon size={16} className="text-primary-foreground" />
@@ -159,14 +159,13 @@ export default function About() {
                     View Profile →
                   </a>
                 </div>
-                {/* Slightly tinted bg so empty squares (which ghchart renders at very low alpha)
-                    don't disappear into the white card on hover. */}
-                <div className="flex-grow rounded-xl bg-primary-foreground/[0.08] p-3 flex overflow-hidden">
+                {/* Darker tinted bg so empty cells stand out against the dimmed-white card. */}
+                <div className="flex-grow rounded-xl bg-primary-foreground/[0.22] p-3 flex overflow-hidden">
                   <img
                     src="https://ghchart.rshah.org/0a0a0a/brysonhen"
                     alt="GitHub contribution graph"
                     className="w-full h-full"
-                    style={{ objectFit: 'fill' }}
+                    style={{ objectFit: 'fill', filter: 'contrast(1.4)' }}
                   />
                 </div>
               </div>

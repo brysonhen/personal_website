@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const links = [
   { href: '#home',       label: 'Home' },
@@ -11,25 +11,12 @@ const links = [
 ]
 
 export default function Navbar() {
-  const [atTop, setAtTop] = useState(true)
   const [mobileOpen, setMobileOpen] = useState(false)
-
-  // Always visible. When at the very top of the page (scrollY < 40), the nav
-  // shrinks slightly and tucks up — gives the Hero room to breathe. Past that
-  // threshold it pops to full size at its normal position.
-  useEffect(() => {
-    const onScroll = () => setAtTop(window.scrollY < 40)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   return (
     <nav
       style={{ transformOrigin: 'top center' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        atTop ? 'scale-95 -translate-y-1 opacity-90' : 'scale-100 translate-y-0 opacity-100'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 scale-95 -translate-y-1 opacity-90"
     >
       {/* Mobile hamburger */}
       <button
