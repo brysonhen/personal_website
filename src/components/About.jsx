@@ -3,6 +3,7 @@ import { MapPin } from 'lucide-react'
 import { GithubIcon } from './Icons'
 import headshot from '../assets/headshot.png'
 import { RevealCardContainer } from './ui/animated-profile-card'
+import { useIsDark } from '../lib/use-is-dark'
 
 const GRAD_DATE = new Date('2027-05-15')
 
@@ -68,6 +69,10 @@ function IntroBody({ inverted, daysLeft, unit, display, onToggle }) {
 export default function About() {
   const [daysLeft, setDaysLeft] = useState(null)
   const [showWeeks, setShowWeeks] = useState(false)
+  const isDark = useIsDark()
+  // GitHub chart swatch color flips with theme so squares contrast against the card
+  const chartBaseColor    = isDark ? 'fafafa' : '171717'
+  const chartOverlayColor = isDark ? '0a0a0a' : 'fafafa'
 
   useEffect(() => {
     setDaysLeft(Math.ceil((GRAD_DATE - Date.now()) / 86400000))
@@ -137,12 +142,12 @@ export default function About() {
                 </div>
                 {/* High-contrast container so empty cells (rendered at very low alpha)
                     show clearly against the dark card. Filter punches up the squares. */}
-                <div className="flex-grow rounded-xl bg-foreground/[0.18] p-3 flex overflow-hidden">
+                <div className="flex-grow rounded-xl bg-foreground/[0.22] p-3 flex overflow-hidden">
                   <img
-                    src="https://ghchart.rshah.org/fafafa/brysonhen"
+                    src={`https://ghchart.rshah.org/${chartBaseColor}/brysonhen`}
                     alt="GitHub contribution graph"
                     className="w-full h-full"
-                    style={{ objectFit: 'fill', filter: 'contrast(1.3) brightness(1.15)' }}
+                    style={{ objectFit: 'fill' }}
                   />
                 </div>
               </div>
@@ -162,10 +167,10 @@ export default function About() {
                 {/* Darker tinted bg so empty cells stand out against the dimmed-white card. */}
                 <div className="flex-grow rounded-xl bg-primary-foreground/[0.22] p-3 flex overflow-hidden">
                   <img
-                    src="https://ghchart.rshah.org/0a0a0a/brysonhen"
+                    src={`https://ghchart.rshah.org/${chartOverlayColor}/brysonhen`}
                     alt="GitHub contribution graph"
                     className="w-full h-full"
-                    style={{ objectFit: 'fill', filter: 'contrast(1.4)' }}
+                    style={{ objectFit: 'fill' }}
                   />
                 </div>
               </div>

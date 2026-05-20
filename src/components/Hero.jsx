@@ -56,9 +56,9 @@ export default function Hero() {
           <span className="block font-sans text-[clamp(52px,10vw,110px)] font-bold tracking-tighter text-foreground">
             BRYSON
           </span>
-          <span className="block font-sans text-[clamp(52px,10vw,110px)] font-bold tracking-tighter"
+          <span className="block font-sans text-[clamp(52px,10vw,110px)] font-bold tracking-tighter text-foreground"
             style={{
-              background: 'linear-gradient(180deg, #fafafa 0%, rgba(250,250,250,0.35) 100%)',
+              background: 'linear-gradient(180deg, rgb(var(--foreground)) 0%, rgb(var(--foreground) / 0.35) 100%)',
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
             }}>
             HENDERSON

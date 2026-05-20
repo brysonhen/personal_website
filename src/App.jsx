@@ -27,19 +27,6 @@ function App() {
     }
   }, [])
 
-  // Scroll progress bar
-  useEffect(() => {
-    const bar = document.getElementById('progress-bar')
-    const onScroll = () => {
-      const scrolled = window.scrollY
-      const total = document.documentElement.scrollHeight - window.innerHeight
-      const pct = total > 0 ? (scrolled / total) * 100 : 0
-      if (bar) bar.style.height = pct + '%'
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
   return (
     <>
       {/* Loading skeleton overlay — still uses framer-motion since it's a fixed overlay,
@@ -65,7 +52,6 @@ function App() {
         style={{ opacity: loading ? 0 : 1 }}
       >
         <div id="grain" aria-hidden="true" />
-        <div id="progress-bar" />
         <Navbar />
         <FlowArt>
           <FlowSection aria-label="Home"><Hero /></FlowSection>

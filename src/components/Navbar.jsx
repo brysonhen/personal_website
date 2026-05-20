@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { AnimatedThemeToggler } from './ui/animated-theme-toggler'
 
 const links = [
   { href: '#home',       label: 'Home' },
@@ -12,11 +13,22 @@ const links = [
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  // Full-size at the very top, shrinks once you've scrolled past ~40px.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <nav
       style={{ transformOrigin: 'top center' }}
-      className="fixed top-0 left-0 right-0 z-50 scale-95 -translate-y-1 opacity-90"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        scrolled ? 'scale-90 -translate-y-1 opacity-95' : 'scale-100 translate-y-0 opacity-100'
+      }`}
     >
       {/* Mobile hamburger */}
       <button
@@ -44,7 +56,6 @@ export default function Navbar() {
                 className="relative inline-block group select-none"
                 onClick={() => setMobileOpen(false)}
               >
-                {/* Link text — flips dark on hover when white fill arrives */}
                 <span className="
                   relative z-10 block uppercase font-sans font-semibold
                   text-foreground transition-colors duration-300
@@ -55,7 +66,6 @@ export default function Navbar() {
                 ">
                   {label}
                 </span>
-                {/* Top + bottom border lines that scale-Y in */}
                 <span className="
                   absolute inset-0 border-t-2 border-b-2 border-foreground
                   scale-y-[2] opacity-0
@@ -63,7 +73,6 @@ export default function Navbar() {
                   group-hover:scale-y-100 group-hover:opacity-100
                   pointer-events-none
                 " />
-                {/* Solid fill that scales-in from the top */}
                 <span className="
                   absolute top-[2px] left-0 w-full h-full bg-foreground
                   scale-0 opacity-0
@@ -74,6 +83,10 @@ export default function Navbar() {
               </a>
             </li>
           ))}
+          {/* Theme toggle — sits at the end of the nav items */}
+          <li className="list-none md:ml-2">
+            <AnimatedThemeToggler />
+          </li>
         </ul>
       </div>
     </nav>

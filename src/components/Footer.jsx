@@ -86,7 +86,6 @@ export default function Footer() {
             ))}
           </div>
 
-          <span className="opacity-80">Built with React &amp; Vite</span>
         </div>
       </div>
     </footer>

@@ -1,6 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
+    <!-- Pre-paint theme bootstrap — set class before React mounts so the first
+         render uses the saved theme and avoids a flash. -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var dark = saved ? saved === 'dark' : true; // default to dark
+          document.documentElement.classList.toggle('dark', dark);
+        } catch (_) {}
+      })();
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

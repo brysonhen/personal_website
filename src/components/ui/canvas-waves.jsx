@@ -1,28 +1,36 @@
 import { useEffect, useRef } from 'react'
+import { useIsDark } from '../../lib/use-is-dark'
 
-// Five layered waves in pure white at varying alpha. Higher alphas + opacity
-// here than before so the lines actually pop on the dark Hero background.
-const WAVES = [
-  { offset: 0,             amplitude: 70, frequency: 0.0030, color: 'rgba(250,250,250,1.00)', opacity: 0.70 },
-  { offset: Math.PI / 2,   amplitude: 90, frequency: 0.0026, color: 'rgba(250,250,250,0.85)', opacity: 0.55 },
-  { offset: Math.PI,       amplitude: 60, frequency: 0.0034, color: 'rgba(250,250,250,0.65)', opacity: 0.45 },
-  { offset: Math.PI * 1.5, amplitude: 80, frequency: 0.0022, color: 'rgba(250,250,250,0.45)', opacity: 0.35 },
-  { offset: Math.PI * 2,   amplitude: 55, frequency: 0.0040, color: 'rgba(250,250,250,0.90)', opacity: 0.50 },
+// Layered glow waves. Line + bg colors flip with the theme.
+const WAVE_LAYERS = [
+  { offset: 0,             amplitude: 70, frequency: 0.0030, lineAlpha: 1.00, opacity: 0.70 },
+  { offset: Math.PI / 2,   amplitude: 90, frequency: 0.0026, lineAlpha: 0.85, opacity: 0.55 },
+  { offset: Math.PI,       amplitude: 60, frequency: 0.0034, lineAlpha: 0.65, opacity: 0.45 },
+  { offset: Math.PI * 1.5, amplitude: 80, frequency: 0.0022, lineAlpha: 0.45, opacity: 0.35 },
+  { offset: Math.PI * 2,   amplitude: 55, frequency: 0.0040, lineAlpha: 0.90, opacity: 0.50 },
 ]
-
-const BG_COLOR = '#0a0a0a'
 
 export default function CanvasWaves() {
   const canvasRef = useRef(null)
   const mouseRef = useRef({ x: 0, y: 0 })
   const targetMouseRef = useRef({ x: 0, y: 0 })
   const runningRef = useRef(true)
+  const isDark = useIsDark()
 
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
+
+    // Theme-aware colors. White waves on near-black page (dark), near-black
+    // waves on white page (light).
+    const lineRGB = isDark ? '250,250,250' : '17,17,17'
+    const bgColor = isDark ? '#0a0a0a' : '#ffffff'
+    const waves = WAVE_LAYERS.map(w => ({
+      ...w,
+      color: `rgba(${lineRGB},${w.lineAlpha})`,
+    }))
 
     let animationId
     let time = 0
@@ -33,7 +41,6 @@ export default function CanvasWaves() {
     const smoothing       = prefersReducedMotion ? 0.04 : 0.10
 
     const resize = () => {
-      // Match canvas pixel dims to its on-screen size so it never stretches
       const rect = canvas.getBoundingClientRect()
       canvas.width = Math.max(1, Math.floor(rect.width))
       canvas.height = Math.max(1, Math.floor(rect.height))
@@ -51,7 +58,6 @@ export default function CanvasWaves() {
     }
     const onMouseLeave = () => recenter()
 
-    // Pause the loop when hero is offscreen so it doesn't burn CPU during scroll
     const io = new IntersectionObserver(([entry]) => {
       runningRef.current = entry.isIntersecting
       if (entry.isIntersecting && !animationId) animationId = requestAnimationFrame(animate)
@@ -101,10 +107,10 @@ export default function CanvasWaves() {
 
       ctx.globalAlpha = 1
       ctx.shadowBlur = 0
-      ctx.fillStyle = BG_COLOR
+      ctx.fillStyle = bgColor
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      WAVES.forEach(drawWave)
+      waves.forEach(drawWave)
 
       animationId = requestAnimationFrame(animate)
     }
@@ -118,7 +124,7 @@ export default function CanvasWaves() {
       if (animationId) cancelAnimationFrame(animationId)
       io.disconnect()
     }
-  }, [])
+  }, [isDark])
 
   return (
     <canvas

@@ -5,18 +5,52 @@
 @tailwind utilities;
 
 @layer base {
+  /* Light theme — default */
+  :root {
+    --bg:                 255 255 255;
+    --surface:            250 250 250;
+    --border:             229 229 229;
+    --muted:              115 115 115;
+    --foreground:         10  10  10;
+    --primary:            23  23  23;
+    --primary-foreground: 250 250 250;
+    --secondary:          245 245 245;
+    --accent:             245 245 245;
+    --ring:               161 161 161;
+    --cta:                34  197 94;
+    --destructive:        231 0   11;
+  }
+
+  /* Dark theme — applied when <html class="dark"> */
+  .dark {
+    --bg:                 10  10  10;
+    --surface:            17  17  17;
+    --border:             38  38  38;
+    --muted:              161 161 161;
+    --foreground:         250 250 250;
+    --primary:            250 250 250;
+    --primary-foreground: 10  10  10;
+    --secondary:          38  38  38;
+    --accent:             38  38  38;
+    --ring:               82  82  82;
+    --cta:                34  197 94;
+    --destructive:        231 0   11;
+  }
+
   html {
     scroll-behavior: smooth;
     scrollbar-width: none;
-    background-color: #0a0a0a;
+    background-color: rgb(var(--bg));
+    color: rgb(var(--foreground));
     font-family: 'Inter', system-ui, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   html::-webkit-scrollbar { display: none; }
 
   body {
-    background-color: #0a0a0a;
-    color: #fafafa;
+    background-color: rgb(var(--bg));
+    color: rgb(var(--foreground));
     font-family: 'Inter', system-ui, sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
@@ -24,14 +58,14 @@
 
   * { box-sizing: border-box; }
 
-  /* Kill Chrome's autofill background — force theme input color */
+  /* Theme-aware autofill background for form inputs */
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
   textarea:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 1000px #262626 inset !important;
-    -webkit-text-fill-color: #fafafa !important;
-    caret-color: #fafafa;
+    -webkit-box-shadow: 0 0 0 1000px rgb(var(--secondary)) inset !important;
+    -webkit-text-fill-color: rgb(var(--foreground)) !important;
+    caret-color: rgb(var(--foreground));
     transition: background-color 9999s ease-out 0s;
   }
 }
@@ -46,15 +80,4 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 300px 300px;
-}
-
-/* Scroll progress bar — switched from primary blue to neutral white */
-#progress-bar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 2px;
-  background: #fafafa;
-  z-index: 100;
-  transition: height 0.05s linear;
 }
