@@ -7,14 +7,23 @@ import { RevealCardContainer } from './ui/animated-profile-card'
 const GRAD_DATE = new Date('2027-05-15')
 
 export function SectionHeading({ top, ghost, align = 'left' }) {
+  const isRight = align === 'right'
   return (
-    <h2 className={`font-sans text-[clamp(48px,8vw,88px)] font-bold tracking-tighter leading-none mb-10 ${align === 'right' ? 'text-right' : ''}`}>
-      <span className="block" style={{
-        background: 'linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.4) 100%)',
-        WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-      }}>{top}</span>
-      <span className="block" style={{ color: 'rgba(255,255,255,0.05)' }}>{ghost}</span>
-    </h2>
+    <header className={`mb-12 md:mb-16 ${isRight ? 'text-right' : ''}`}>
+      {/* Small uppercase label + horizontal accent line */}
+      <div className={`flex items-center gap-4 mb-5 ${isRight ? 'flex-row-reverse' : ''}`}>
+        {ghost && (
+          <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-muted shrink-0">
+            / {ghost}
+          </span>
+        )}
+        <span className="flex-1 h-px bg-border" aria-hidden="true" />
+      </div>
+      {/* Big bold title — clean, no gradient */}
+      <h2 className="font-sans font-bold tracking-[-0.04em] leading-[0.95] text-foreground text-[clamp(48px,9vw,120px)]">
+        {top}
+      </h2>
+    </header>
   )
 }
 
@@ -68,8 +77,8 @@ export default function About() {
   const unit    = showWeeks ? 'weeks' : 'days'
 
   return (
-    <section id="about" className="px-10 md:px-16 py-20">
-      <SectionHeading top="ABOUT" ghost="ME" />
+    <section id="about" className="px-10 md:px-16 pt-32 pb-20">
+      <SectionHeading top="ABOUT" ghost="Who I am" />
 
       <div className="grid gap-4 about-bento">
         {/* Photo */}
@@ -126,7 +135,16 @@ export default function About() {
                   <GithubIcon size={16} className="text-muted" />
                   <span className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted">Contributions</span>
                 </div>
-                <img src="https://ghchart.rshah.org/525252/brysonhen" alt="GitHub contribution graph" className="w-full h-auto opacity-80 mt-auto" />
+                {/* flex-grow container so the chart fills the bottom of the card.
+                    Subtle bg tint gives empty (no-contribution) cells contrast to read against. */}
+                <div className="flex-grow rounded-xl bg-foreground/[0.05] p-3 flex overflow-hidden">
+                  <img
+                    src="https://ghchart.rshah.org/fafafa/brysonhen"
+                    alt="GitHub contribution graph"
+                    className="w-full h-full"
+                    style={{ objectFit: 'fill' }}
+                  />
+                </div>
               </div>
             }
             overlay={
@@ -141,7 +159,16 @@ export default function About() {
                     View Profile →
                   </a>
                 </div>
-                <img src="https://ghchart.rshah.org/0a0a0a/brysonhen" alt="GitHub contribution graph" className="w-full h-auto mt-auto" />
+                {/* Slightly tinted bg so empty squares (which ghchart renders at very low alpha)
+                    don't disappear into the white card on hover. */}
+                <div className="flex-grow rounded-xl bg-primary-foreground/[0.08] p-3 flex overflow-hidden">
+                  <img
+                    src="https://ghchart.rshah.org/0a0a0a/brysonhen"
+                    alt="GitHub contribution graph"
+                    className="w-full h-full"
+                    style={{ objectFit: 'fill' }}
+                  />
+                </div>
               </div>
             }
           />

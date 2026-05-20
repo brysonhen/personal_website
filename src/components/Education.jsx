@@ -1,90 +1,128 @@
-import { GraduationCap, School } from 'lucide-react'
 import { SectionHeading } from './About'
 
-const education = [
-  {
-    icon: GraduationCap,
-    school: 'University of Mississippi (Ole Miss)',
-    degree: 'B.S. Computer Science — Data Science Emphasis',
-    meta: ['Oxford, MS', '2023 – 2027', 'GPA 3.54', 'Minor: Mathematics'],
-    progress: 75,
-    coursework: [
-      { label: 'Algorithm & Data Structure Analysis', tip: 'Sorting, trees, graphs, dynamic programming, complexity' },
-      { label: 'Data Science', tip: 'Exploratory analysis, visualization, ML fundamentals with Python' },
-      { label: 'Advanced Data Science', tip: 'ML models, statistical learning, real-world datasets' },
-      { label: 'Database Systems', tip: 'SQL, schema design, indexing, query optimization' },
-      { label: 'Software Design & Development', tip: 'OOP patterns, architecture, team-based development' },
-      { label: 'Operating Systems', tip: 'Processes, memory management, threading, scheduling' },
-      { label: 'Computer Organization & Assembly', tip: 'Hardware abstraction, memory hierarchy, x86 assembly' },
-      { label: 'Formal & Programming Languages', tip: 'Grammars, parsing, compilers, language theory' },
-      { label: 'Discrete Mathematics', tip: 'Logic, proofs, graph theory, combinatorics' },
-      { label: 'Engineering Statistics', tip: 'Probability, distributions, hypothesis testing' },
-    ],
-    involvement: ["Dean's Honor Roll", "Chancellor's Honor Roll", 'Academic Scholarships', 'Delta Psi Fraternity', 'Coding Club', 'Intramural Soccer'],
-  },
-  {
-    icon: School,
-    school: 'Madison Central High School',
-    degree: 'High School Diploma',
-    meta: ['Madison, MS', '2019 – 2023', 'GPA 3.64', 'ACT 28'],
-  },
+const coursework = [
+  { label: 'Algorithm & Data Structure Analysis', tip: 'Sorting, trees, graphs, dynamic programming, complexity' },
+  { label: 'Data Science', tip: 'Exploratory analysis, visualization, ML fundamentals with Python' },
+  { label: 'Advanced Data Science', tip: 'ML models, statistical learning, real-world datasets' },
+  { label: 'Database Systems', tip: 'SQL, schema design, indexing, query optimization' },
+  { label: 'Software Design & Development', tip: 'OOP patterns, architecture, team-based development' },
+  { label: 'Operating Systems', tip: 'Processes, memory management, threading, scheduling' },
+  { label: 'Computer Organization & Assembly', tip: 'Hardware abstraction, memory hierarchy, x86 assembly' },
+  { label: 'Formal & Programming Languages', tip: 'Grammars, parsing, compilers, language theory' },
+  { label: 'Discrete Mathematics', tip: 'Logic, proofs, graph theory, combinatorics' },
+  { label: 'Engineering Statistics', tip: 'Probability, distributions, hypothesis testing' },
 ]
+const honors = ["Dean's Honor Roll", "Chancellor's Honor Roll", 'Academic Scholarships']
+const involvement = ['Delta Psi Fraternity', 'Coding Club', 'Intramural Soccer']
+
+function StatBadge({ label, value }) {
+  return (
+    <div className="flex-1 min-w-[110px] px-5 py-4 rounded-2xl bg-bg border border-border">
+      <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-1.5">{label}</div>
+      <div className="text-2xl font-bold text-foreground tracking-tight">{value}</div>
+    </div>
+  )
+}
 
 export default function Education() {
   return (
-    <section id="education" className="px-10 md:px-16 py-20 bg-bg">
-      <SectionHeading top="EDUCATION" ghost="" />
-      <div className="flex flex-col">
-        {education.map((edu, i) => {
-          const Icon = edu.icon
-          return (
-            <div key={edu.school} className={`py-10 ${i > 0 ? 'border-t border-border' : ''} group`}>
-              <div className="flex items-start gap-5 mb-5">
-                <div className="w-[38px] h-[38px] rounded-[10px] bg-surface border border-border flex items-center justify-center shrink-0 mt-0.5 transition-all duration-200 group-hover:border-primary group-hover:bg-primary/10">
-                  <Icon size={16} className="text-muted group-hover:text-primary transition-colors duration-200" />
-                </div>
-                <div>
-                  <div className="text-[11px] font-bold tracking-[1.5px] uppercase text-muted mb-2">{edu.school}</div>
-                  <div className="text-[22px] font-bold text-foreground leading-snug">{edu.degree}</div>
-                </div>
-              </div>
+    <section id="education" className="px-10 md:px-16 pt-32 pb-20">
+      <SectionHeading top="EDUCATION" ghost="Academic background" />
 
-              <div className="flex flex-wrap text-[13px] text-muted mb-8">
-                {edu.meta.map((m, j) => (
-                  <span key={m}>{m}{j < edu.meta.length - 1 && <span className="mx-2.5 opacity-40">·</span>}</span>
-                ))}
-              </div>
-
-              {edu.progress && (
-                <div className="h-[2px] bg-border rounded-full mb-6 overflow-hidden">
-                  <div className="h-full rounded-full bg-primary" style={{ width: `${edu.progress}%`, transition: 'width 1s ease' }} />
-                </div>
-              )}
-
-              {edu.coursework && (
-                <>
-                  <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-3">Relevant Coursework</div>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {edu.coursework.map(c => (
-                      <div key={c.label} className="relative group/chip">
-                        <span className="text-[13px] text-muted px-3 py-1 rounded-lg bg-surface border border-border cursor-default hover:border-primary hover:text-foreground transition-colors duration-150">{c.label}</span>
-                        <div className="absolute bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2 z-10 pointer-events-none opacity-0 group-hover/chip:opacity-100 transition-opacity duration-150">
-                          <div className="bg-surface border border-border rounded-lg px-3 py-1.5 text-xs text-foreground whitespace-nowrap shadow-lg">{c.tip}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-3 mt-6">Involvement</div>
-                  <div className="flex flex-wrap gap-2">
-                    {edu.involvement.map(item => (
-                      <span key={item} className="text-[13px] text-muted px-3 py-1 rounded-lg bg-surface border border-border hover:border-primary hover:text-foreground transition-colors duration-150 cursor-default">{item}</span>
-                    ))}
-                  </div>
-                </>
-              )}
+      {/* Featured: Ole Miss */}
+      <div className="rounded-[28px] border border-border bg-surface p-8 md:p-10 mb-4">
+        <div className="flex flex-wrap items-start justify-between gap-6 mb-8">
+          <div>
+            <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-3">
+              University of Mississippi · Oxford, MS
             </div>
-          )
-        })}
+            <h3 className="text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-foreground leading-[1.05]">
+              B.S. Computer Science
+            </h3>
+            <p className="text-[15px] md:text-base text-muted mt-2">
+              Data Science Emphasis · Minor in Mathematics
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2 md:gap-3">
+            <StatBadge label="GPA" value="3.54" />
+            <StatBadge label="Class" value="'27" />
+            <StatBadge label="Started" value="2023" />
+          </div>
+        </div>
+
+        {/* Degree progress bar */}
+        <div className="mb-10">
+          <div className="flex items-baseline justify-between text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-2">
+            <span>Degree Progress</span>
+            <span className="text-foreground">75%</span>
+          </div>
+          <div className="h-1 bg-border rounded-full overflow-hidden">
+            <div className="h-full rounded-full bg-foreground" style={{ width: '75%', transition: 'width 1s ease' }} />
+          </div>
+          <div className="flex justify-between text-[10px] uppercase tracking-[1px] text-muted mt-1.5">
+            <span>2023</span>
+            <span>2024</span>
+            <span>2025</span>
+            <span>2026</span>
+            <span>2027</span>
+          </div>
+        </div>
+
+        {/* Knowledge grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr] gap-8">
+          <div>
+            <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-4">Relevant Coursework</div>
+            <div className="flex flex-wrap gap-2">
+              {coursework.map(c => (
+                <div key={c.label} className="relative group/chip">
+                  <span className="inline-block text-[12px] text-muted px-3 py-1.5 rounded-full bg-bg border border-border cursor-default hover:border-primary hover:text-foreground transition-colors duration-150">
+                    {c.label}
+                  </span>
+                  <div className="absolute bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2 z-10 pointer-events-none opacity-0 group-hover/chip:opacity-100 transition-opacity duration-150">
+                    <div className="bg-bg border border-border rounded-lg px-3 py-1.5 text-xs text-foreground whitespace-nowrap shadow-lg">{c.tip}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-4">Honors</div>
+            <ul className="flex flex-col gap-2.5">
+              {honors.map(h => (
+                <li key={h} className="text-sm text-foreground/85 leading-relaxed flex gap-2.5">
+                  <span className="text-muted/60 shrink-0">—</span>{h}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-4">Involvement</div>
+            <ul className="flex flex-col gap-2.5">
+              {involvement.map(i => (
+                <li key={i} className="text-sm text-foreground/85 leading-relaxed flex gap-2.5">
+                  <span className="text-muted/60 shrink-0">—</span>{i}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* High School — secondary line */}
+      <div className="rounded-[28px] border border-border bg-surface px-8 md:px-10 py-6 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-1">Madison Central High School · Madison, MS</div>
+          <div className="text-xl font-bold text-foreground">High School Diploma</div>
+        </div>
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-[13px] text-muted">
+          <span>2019 – 2023</span>
+          <span className="opacity-40">·</span>
+          <span>GPA 3.64</span>
+          <span className="opacity-40">·</span>
+          <span>ACT 28</span>
+        </div>
       </div>
     </section>
   )

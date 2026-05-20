@@ -11,6 +11,7 @@ import Skills from './components/ui/sticky-scroll'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import AnimatedLoadingSkeleton from './components/ui/animated-loading-skeleton'
+import FlowArt, { FlowSection } from './components/ui/story-scroll'
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -41,6 +42,8 @@ function App() {
 
   return (
     <>
+      {/* Loading skeleton overlay — still uses framer-motion since it's a fixed overlay,
+          unaffected by the pin/transform issue. */}
       <AnimatePresence>
         {loading && (
           <motion.div
@@ -54,25 +57,27 @@ function App() {
         )}
       </AnimatePresence>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: loading ? 0 : 1 }}
-        transition={{ duration: 0.5, ease: 'easeInOut', delay: 0.1 }}
+      {/* CRITICAL: plain <div> + CSS opacity transition. A motion.div here would
+          create a transform stacking context, which breaks the position:fixed
+          that GSAP's pin: true relies on, blanking the page. */}
+      <div
+        className="transition-opacity duration-500 ease-in-out"
+        style={{ opacity: loading ? 0 : 1 }}
       >
         <div id="grain" aria-hidden="true" />
         <div id="progress-bar" />
         <Navbar />
-        <main>
-          <Hero />
-          <About />
-          <Projects />
-          <Education />
-          <Experience />
-          <Skills />
-          <Contact />
-        </main>
+        <FlowArt>
+          <FlowSection aria-label="Home"><Hero /></FlowSection>
+          <FlowSection aria-label="About"      from="bl"><About /></FlowSection>
+          <FlowSection aria-label="Projects"   from="br"><Projects /></FlowSection>
+          <FlowSection aria-label="Education"  from="tl"><Education /></FlowSection>
+          <FlowSection aria-label="Experience" from="tr"><Experience /></FlowSection>
+          <FlowSection aria-label="Skills"     from="bl"><Skills /></FlowSection>
+          <FlowSection aria-label="Contact"    from="br"><Contact /></FlowSection>
+        </FlowArt>
         <Footer />
-      </motion.div>
+      </div>
     </>
   )
 }

@@ -6,7 +6,7 @@ const projects = [
   {
     title: "Inspect AI",
     description: "Inspection management web app creating transparency throughout the dorm inspection process.",
-    year: "2024",
+    year: "2026",
     link: "https://www.inspectai.info/",
     github: "https://github.com/JulienrBourgeois/Dorm-AI",
     stack: ["Next.js", "Firebase", "Node.js", "Vercel"],
@@ -19,7 +19,8 @@ const projects = [
     link: "https://github.com/brysonhen",
     github: "https://github.com/brysonhen",
     stack: [],
-    image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=600&auto=format&fit=crop&q=80",
+    // Reliable code/dev Unsplash photo as the GitHub project preview
+    image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=800&auto=format&fit=crop&q=80",
   },
 ]
 
@@ -57,7 +58,7 @@ export function ProjectShowcase() {
     <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full max-w-2xl mx-auto px-6 py-16"
+      className="relative w-full"
     >
       {/* Floating image preview */}
       <div
@@ -99,31 +100,31 @@ export function ProjectShowcase() {
             onMouseEnter={() => { setHoveredIndex(index); setIsVisible(true) }}
             onMouseLeave={() => { setHoveredIndex(null); setIsVisible(false) }}
           >
-            <div className="relative py-6 border-t border-border transition-all duration-300">
+            <div className="relative py-10 border-t border-border transition-all duration-300">
               {/* Hover background */}
-              <div className={`absolute inset-0 -mx-4 px-4 bg-surface/60 rounded-xl transition-all duration-300 ease-out ${hoveredIndex === index ? "opacity-100 scale-100" : "opacity-0 scale-95"}`} />
+              <div className={`absolute inset-0 -mx-6 px-6 bg-surface/60 rounded-2xl transition-all duration-300 ease-out ${hoveredIndex === index ? "opacity-100 scale-100" : "opacity-0 scale-95"}`} />
 
-              <div className="relative flex items-start justify-between gap-4">
+              <div className="relative flex items-start justify-between gap-6">
                 <div className="flex-1 min-w-0">
-                  <div className="inline-flex items-center gap-2">
-                    <h3 className="text-foreground font-medium text-lg tracking-tight">
+                  <div className="inline-flex items-center gap-3">
+                    <h3 className="text-foreground font-semibold text-3xl md:text-4xl tracking-tight">
                       <span className="relative">
                         {project.title}
-                        <span className={`absolute left-0 -bottom-0.5 h-px bg-primary transition-all duration-300 ease-out ${hoveredIndex === index ? "w-full" : "w-0"}`} />
+                        <span className={`absolute left-0 -bottom-1 h-px bg-primary transition-all duration-300 ease-out ${hoveredIndex === index ? "w-full" : "w-0"}`} />
                       </span>
                     </h3>
-                    <ArrowUpRight className={`w-4 h-4 transition-all duration-300 ease-out ${hoveredIndex === index ? "opacity-100 translate-x-0 translate-y-0 text-primary" : "opacity-0 -translate-x-2 translate-y-2 text-muted"}`} />
+                    <ArrowUpRight className={`w-6 h-6 transition-all duration-300 ease-out ${hoveredIndex === index ? "opacity-100 translate-x-0 translate-y-0 text-primary" : "opacity-0 -translate-x-2 translate-y-2 text-muted"}`} />
                   </div>
 
-                  <p className={`text-sm mt-1 leading-relaxed transition-colors duration-300 ${hoveredIndex === index ? "text-foreground/80" : "text-muted"}`}>
+                  <p className={`text-base md:text-lg mt-3 leading-relaxed transition-colors duration-300 max-w-2xl ${hoveredIndex === index ? "text-foreground/80" : "text-muted"}`}>
                     {project.description}
                   </p>
 
                   {/* Stack tags */}
                   {project.stack.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mt-3">
+                    <div className="flex flex-wrap gap-2 mt-5">
                       {project.stack.map(s => (
-                        <span key={s} className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-bg border border-border text-muted transition-colors duration-150 hover:border-primary hover:text-primary">
+                        <span key={s} className="text-xs font-semibold px-3 py-1 rounded-full bg-bg border border-border text-muted transition-colors duration-150 hover:border-primary hover:text-primary">
                           {s}
                         </span>
                       ))}
@@ -131,7 +132,7 @@ export function ProjectShowcase() {
                   )}
                 </div>
 
-                <span className={`text-xs font-sans tabular-nums transition-colors duration-300 shrink-0 pt-1 ${hoveredIndex === index ? "text-primary" : "text-muted"}`}>
+                <span className={`text-sm font-sans tabular-nums transition-colors duration-300 shrink-0 pt-2 ${hoveredIndex === index ? "text-primary" : "text-muted"}`}>
                   {project.year}
                 </span>
               </div>

@@ -49,7 +49,8 @@ export const RevealCardContainer = forwardRef((
       className={cn('relative overflow-hidden rounded-3xl border-2', className)}
       {...rest}
     >
-      <div>{base}</div>
+      {/* Base wrapper gets h-full so children using `h-full` (e.g. flex-grow charts) actually fill. */}
+      <div className="h-full">{base}</div>
       <div ref={overlayRef} className="absolute inset-0 h-full w-full">
         {overlay}
       </div>

@@ -1,58 +1,94 @@
 import { useEffect, useState } from 'react'
-import { Home, User, Laptop, GraduationCap, Briefcase, Code, Send } from 'lucide-react'
-import { motion } from 'framer-motion'
 
 const links = [
-  { href: '#home',       icon: Home,          label: 'Home' },
-  { href: '#about',      icon: User,          label: 'About' },
-  { href: '#projects',   icon: Laptop,        label: 'Projects' },
-  { href: '#education',  icon: GraduationCap, label: 'Education' },
-  { href: '#experience', icon: Briefcase,     label: 'Experience' },
-  { href: '#skills',     icon: Code,          label: 'Skills' },
-  { href: '#contact',    icon: Send,          label: 'Contact' },
+  { href: '#home',       label: 'Home' },
+  { href: '#about',      label: 'About' },
+  { href: '#projects',   label: 'Projects' },
+  { href: '#education',  label: 'Education' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#skills',     label: 'Skills' },
+  { href: '#contact',    label: 'Contact' },
 ]
 
 export default function Navbar() {
-  const [active, setActive] = useState('#home')
+  const [atTop, setAtTop] = useState(true)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
+  // Always visible. When at the very top of the page (scrollY < 40), the nav
+  // shrinks slightly and tucks up — gives the Hero room to breathe. Past that
+  // threshold it pops to full size at its normal position.
   useEffect(() => {
-    const sections = links.map(l => document.querySelector(l.href)).filter(Boolean)
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) setActive('#' + e.target.id) }),
-      { rootMargin: '-40% 0px -55% 0px' }
-    )
-    sections.forEach(s => observer.observe(s))
-    return () => observer.disconnect()
+    const onScroll = () => setAtTop(window.scrollY < 40)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
-    <motion.nav
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="fixed top-5 inset-x-0 mx-auto w-fit z-50 flex items-center gap-1 px-2.5 py-2 rounded-full border border-border bg-bg/90 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] select-none"
+    <nav
+      style={{ transformOrigin: 'top center' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        atTop ? 'scale-95 -translate-y-1 opacity-90' : 'scale-100 translate-y-0 opacity-100'
+      }`}
     >
-      {links.map(({ href, icon: Icon, label }) => {
-        const isActive = active === href
-        return (
-          <a
-            key={href}
-            href={href}
-            className={`relative flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-semibold tracking-wide uppercase transition-colors duration-200 cursor-pointer
-              ${isActive ? 'text-primary-foreground' : 'text-muted hover:text-foreground'}`}
-          >
-            {isActive && (
-              <motion.span
-                layoutId="nav-pill"
-                className="absolute inset-0 rounded-full bg-primary"
-                transition={{ type: 'spring', stiffness: 380, damping: 36 }}
-              />
-            )}
-            <Icon size={14} className="relative z-10 shrink-0" />
-            <span className="relative z-10 hidden sm:inline">{label}</span>
-          </a>
-        )
-      })}
-    </motion.nav>
+      {/* Mobile hamburger */}
+      <button
+        type="button"
+        onClick={() => setMobileOpen(v => !v)}
+        className="md:hidden absolute top-5 right-5 z-20 p-2"
+        aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+      >
+        <div className={`w-6 h-0.5 bg-foreground mb-1.5 transition-transform duration-300 ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`} />
+        <div className={`w-6 h-0.5 bg-foreground mb-1.5 transition-opacity duration-300 ${mobileOpen ? 'opacity-0' : ''}`} />
+        <div className={`w-6 h-0.5 bg-foreground transition-transform duration-300 ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+      </button>
+
+      <div
+        className={`
+          flex items-center justify-center w-full py-6
+          ${mobileOpen ? 'flex' : 'hidden md:flex'}
+        `}
+      >
+        <ul className="flex flex-col items-center gap-4 md:flex-row md:gap-2 lg:gap-3">
+          {links.map(({ href, label }) => (
+            <li key={href} className="list-none">
+              <a
+                href={href}
+                className="relative inline-block group select-none"
+                onClick={() => setMobileOpen(false)}
+              >
+                {/* Link text — flips dark on hover when white fill arrives */}
+                <span className="
+                  relative z-10 block uppercase font-sans font-semibold
+                  text-foreground transition-colors duration-300
+                  group-hover:text-primary-foreground
+                  text-base py-2 px-4
+                  md:text-sm md:py-2 md:px-3
+                  lg:text-base lg:py-2 lg:px-4
+                ">
+                  {label}
+                </span>
+                {/* Top + bottom border lines that scale-Y in */}
+                <span className="
+                  absolute inset-0 border-t-2 border-b-2 border-foreground
+                  scale-y-[2] opacity-0
+                  transition-all duration-300 origin-center
+                  group-hover:scale-y-100 group-hover:opacity-100
+                  pointer-events-none
+                " />
+                {/* Solid fill that scales-in from the top */}
+                <span className="
+                  absolute top-[2px] left-0 w-full h-full bg-foreground
+                  scale-0 opacity-0
+                  transition-all duration-300 origin-top
+                  group-hover:scale-100 group-hover:opacity-100
+                  pointer-events-none
+                " />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
   )
 }
