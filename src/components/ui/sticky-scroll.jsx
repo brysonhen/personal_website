@@ -45,7 +45,7 @@ const categories = [
 
 function SkillCard({ name, icon, invert = false }) {
   return (
-    <div className="flex items-center gap-3 px-3 py-3 rounded-2xl border border-border bg-surface transition-colors duration-200 hover:border-ring">
+    <div className="flex items-center gap-3 px-3 py-3 rounded-lg border border-border bg-surface transition-colors duration-200 hover:border-ring">
       <img
         src={`https://api.iconify.design/${icon}.svg`}
         alt={name}

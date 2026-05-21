@@ -42,14 +42,14 @@ export default function AnimatedLoadingSkeleton() {
           <Bar
             w="w-[clamp(260px,50vw,560px)]"
             h="h-[clamp(52px,10vw,110px)]"
-            rounded="rounded-2xl"
+            rounded="rounded-lg"
             delay={0}
           />
           <div className="mt-3">
             <Bar
               w="w-[clamp(320px,62vw,680px)]"
               h="h-[clamp(52px,10vw,110px)]"
-              rounded="rounded-2xl"
+              rounded="rounded-lg"
               delay={0.1}
               className="bg-primary/20"
             />

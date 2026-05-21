@@ -41,7 +41,7 @@ function ContactCard({ icon: Icon, label, value, copy, href, download, onCopy, i
       onMouseEnter={reveal}
       onMouseLeave={conceal}
       {...extra}
-      className="relative block overflow-hidden rounded-2xl border border-border bg-surface text-left no-underline text-inherit cursor-pointer group"
+      className="relative block overflow-hidden rounded-lg border border-border bg-surface text-left no-underline text-inherit cursor-pointer group"
     >
       {/* Base */}
       <div className="relative flex items-center gap-4 px-5 py-4">
@@ -115,7 +115,7 @@ function ResumeHalf({ href, download, target, rel, ariaLabel, className = '', ba
 // with a vertical divider line between them. Each half has its own hover reveal.
 function ResumeButton() {
   return (
-    <div className="flex rounded-2xl border border-border bg-surface overflow-hidden">
+    <div className="flex rounded-lg border border-border bg-surface overflow-hidden">
       {/* Preview — opens the PDF in a new tab */}
       <ResumeHalf
         href="/resume.pdf"

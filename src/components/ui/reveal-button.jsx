@@ -35,7 +35,7 @@ export function RevealButton({
       onMouseEnter={reveal}
       onMouseLeave={conceal}
       className={cn(
-        'group relative inline-flex items-center gap-2 overflow-hidden rounded-2xl px-5 py-2.5 text-sm font-semibold cursor-pointer select-none',
+        'group relative inline-flex items-center gap-2 overflow-hidden rounded-lg px-5 py-2.5 text-sm font-semibold cursor-pointer select-none',
         'bg-card text-foreground border border-border transition-colors duration-300',
         'hover:text-primary-foreground hover:border-primary',
         className

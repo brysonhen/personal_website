@@ -49,7 +49,7 @@ function GithubBody({ inverted }) {
           View Profile →
         </a>
       </div>
-      <div className="flex-grow rounded-xl bg-[#ebedf0] p-3 flex overflow-hidden">
+      <div className="flex-grow rounded-md bg-[#ebedf0] p-3 flex overflow-hidden">
         <img
           src="https://ghchart.rshah.org/0d0d0d/brysonhen"
           alt="GitHub contribution graph"
@@ -109,7 +109,7 @@ export default function About() {
 
       <div className="grid gap-4 about-bento">
         {/* Photo */}
-        <div className="rounded-2xl overflow-hidden border border-border bg-surface aspect-[4/5] md:aspect-auto h-full" style={{ gridArea: 'profile' }}>
+        <div className="rounded-lg overflow-hidden border border-border bg-surface aspect-[4/5] md:aspect-auto h-full" style={{ gridArea: 'profile' }}>
           <img src={headshot} alt="Bryson Henderson" className="w-full h-full object-cover object-top" />
         </div>
 
@@ -118,7 +118,7 @@ export default function About() {
           <RevealCardContainer
             accent="#262626"
             origin="0px 0px"
-            className="w-full h-full rounded-2xl"
+            className="w-full h-full rounded-lg"
             base={<IntroBody inverted={false} daysLeft={daysLeft} unit={unit} display={display} onToggle={() => setShowWeeks(v => !v)} />}
             overlay={<IntroBody inverted={true}  daysLeft={daysLeft} unit={unit} display={display} onToggle={() => setShowWeeks(v => !v)} />}
           />
@@ -129,7 +129,7 @@ export default function About() {
           <RevealCardContainer
             accent="#262626"
             origin="0px 0px"
-            className="w-full h-full rounded-2xl"
+            className="w-full h-full rounded-lg"
             base={
               <div className="bg-surface p-7 flex flex-col gap-4 h-full">
                 <span className="text-[22px] font-bold tracking-tight text-foreground">Get To Know Me</span>
@@ -155,7 +155,7 @@ export default function About() {
           <RevealCardContainer
             accent="#262626"
             origin="0px 0px"
-            className="w-full h-full rounded-2xl"
+            className="w-full h-full rounded-lg"
             base={<GithubBody inverted={false} />}
             overlay={<GithubBody inverted={true} />}
           />

@@ -70,7 +70,7 @@ export function ProjectShowcase() {
           transition: "opacity 0.3s cubic-bezier(0.4,0,0.2,1), scale 0.3s cubic-bezier(0.4,0,0.2,1)",
         }}
       >
-        <div className="relative w-[280px] h-[180px] bg-surface rounded-xl overflow-hidden">
+        <div className="relative w-[280px] h-[180px] bg-surface rounded-md overflow-hidden">
           {projects.map((project, index) => (
             <img
               key={project.title}
@@ -102,7 +102,7 @@ export function ProjectShowcase() {
           >
             <div className="relative py-10 border-t border-border transition-all duration-300">
               {/* Hover background */}
-              <div className={`absolute inset-0 -mx-6 px-6 bg-surface/60 rounded-2xl transition-all duration-300 ease-out ${hoveredIndex === index ? "opacity-100 scale-100" : "opacity-0 scale-95"}`} />
+              <div className={`absolute inset-0 -mx-6 px-6 bg-surface/60 rounded-lg transition-all duration-300 ease-out ${hoveredIndex === index ? "opacity-100 scale-100" : "opacity-0 scale-95"}`} />
 
               <div className="relative flex items-start justify-between gap-6">
                 <div className="flex-1 min-w-0">
