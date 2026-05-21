@@ -11,6 +11,7 @@ import Skills from './components/ui/sticky-scroll'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import AnimatedLoadingSkeleton from './components/ui/animated-loading-skeleton'
+import Contributions from './components/ui/contributions'
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -55,6 +56,7 @@ function App() {
         <main>
           <Hero />
           <About />
+          <Contributions />
           <Projects />
           <Education />
           <Experience />

@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import { MapPin } from 'lucide-react'
-import { GithubIcon } from './Icons'
 import headshot from '../assets/headshot.png'
-import Contributions from './ui/contributions'
 
 const GRAD_DATE = new Date('2027-05-15')
 
@@ -63,7 +61,7 @@ export default function About() {
         <Card area="intro">
           <div className="p-7 flex flex-col gap-6 h-full">
             <p className="text-[17px] leading-[1.8] text-foreground/80">
-              Junior at Ole Miss studying Computer Science with a Data Science emphasis. Currently looking for software engineering and data science internships for summer 2026.
+              Senior at Ole Miss studying Computer Science with a Data Science emphasis. Currently looking for software engineering and data science internships for summer 2026.
             </p>
             <div className="flex flex-wrap gap-x-7 gap-y-4 mt-auto">
               <div className="flex items-center gap-3.5">
@@ -99,37 +97,17 @@ export default function About() {
           </div>
         </Card>
 
-        {/* GitHub */}
-        <Card area="github">
-          <div className="p-7 flex flex-col gap-4 h-full">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <GithubIcon size={16} className="text-muted" />
-                <span className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted">Contributions</span>
-              </div>
-              <a
-                href="https://github.com/brysonhen"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[12px] font-semibold text-muted hover:text-foreground transition-colors"
-              >
-                View Profile →
-              </a>
-            </div>
-            <Contributions />
-          </div>
-        </Card>
       </div>
 
       <style>{`
         .about-bento {
           grid-template-columns: 1fr;
-          grid-template-areas: "profile" "intro" "know" "github";
+          grid-template-areas: "profile" "intro" "know";
         }
         @media (min-width: 768px) {
           .about-bento {
             grid-template-columns: 280px 1fr 1fr;
-            grid-template-areas: "profile intro intro" "profile know github";
+            grid-template-areas: "profile intro know";
           }
         }
       `}</style>

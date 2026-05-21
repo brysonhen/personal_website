@@ -49,7 +49,7 @@ export default function Navbar() {
         `}
       >
         {/* Floating nav bar — square corners so the rectangular hover effect on each link sits flush */}
-        <ul className="pointer-events-auto flex flex-col items-center gap-4 rounded-md border border-border bg-bg shadow-lg px-2 py-1.5 md:flex-row md:gap-1 lg:gap-2">
+        <ul className="pointer-events-auto flex flex-col items-center gap-4 rounded-md border border-border bg-bg/60 shadow-lg px-2 py-1.5 md:flex-row md:gap-1 lg:gap-2">
           {links.map(({ href, label }) => (
             <li key={href} className="list-none">
               <a

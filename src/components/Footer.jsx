@@ -2,12 +2,13 @@ import { ArrowUp, Mail } from 'lucide-react'
 import { GithubIcon, LinkedinIcon, InstagramIcon } from './Icons'
 
 const navLinks = [
-  { href: '#about',      label: 'About' },
-  { href: '#projects',   label: 'Projects' },
-  { href: '#education',  label: 'Education' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#skills',     label: 'Skills' },
-  { href: '#contact',    label: 'Contact' },
+  { href: '#about',         label: 'About' },
+  { href: '#contributions', label: 'Contributions' },
+  { href: '#projects',      label: 'Projects' },
+  { href: '#education',     label: 'Education' },
+  { href: '#experience',    label: 'Experience' },
+  { href: '#skills',        label: 'Skills' },
+  { href: '#contact',       label: 'Contact' },
 ]
 
 const socials = [
