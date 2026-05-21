@@ -50,7 +50,7 @@ export default function Experience() {
                 </div>
 
                 {/* Card */}
-                <div className="rounded-[22px] border border-border bg-surface p-7 md:p-8 transition-colors duration-200 group-hover:border-ring">
+                <div className="rounded-2xl border border-border bg-surface p-7 md:p-8 transition-colors duration-200 group-hover:border-ring">
                   <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
                     <div>
                       <h3 className="text-2xl md:text-[28px] font-bold text-foreground tracking-tight leading-tight">

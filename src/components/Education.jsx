@@ -30,7 +30,7 @@ export default function Education() {
       <SectionHeading top="EDUCATION" ghost="Academic background" />
 
       {/* Featured: Ole Miss */}
-      <div className="rounded-[28px] border border-border bg-surface p-8 md:p-10 mb-4">
+      <div className="rounded-2xl border border-border bg-surface p-8 md:p-10 mb-4">
         <div className="flex flex-wrap items-start justify-between gap-6 mb-8">
           <div>
             <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-3">
@@ -62,7 +62,7 @@ export default function Education() {
                     {c.label}
                   </span>
                   <div className="absolute bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2 z-10 pointer-events-none opacity-0 group-hover/chip:opacity-100 transition-opacity duration-150">
-                    <div className="bg-bg border border-border rounded-lg px-3 py-1.5 text-xs text-foreground whitespace-nowrap shadow-lg">{c.tip}</div>
+                    <div className="bg-bg border border-border rounded-md px-3 py-1.5 text-xs text-foreground whitespace-nowrap shadow-lg">{c.tip}</div>
                   </div>
                 </div>
               ))}
@@ -94,7 +94,7 @@ export default function Education() {
       </div>
 
       {/* High School — secondary line */}
-      <div className="rounded-[28px] border border-border bg-surface px-8 md:px-10 py-6 flex flex-wrap items-center justify-between gap-4">
+      <div className="rounded-2xl border border-border bg-surface px-8 md:px-10 py-6 flex flex-wrap items-center justify-between gap-4">
         <div>
           <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-1">Madison Central High School · Madison, MS</div>
           <div className="text-xl font-bold text-foreground">High School Diploma</div>

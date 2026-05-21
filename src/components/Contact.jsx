@@ -164,13 +164,21 @@ export default function Contact() {
     setTimeout(() => setCopied(false), 2000)
   }
 
+  // EmailJS credentials come from build-time env vars so they aren't hardcoded.
+  // Set these as Vite env vars (VITE_*) locally and as GitHub Actions secrets
+  // for production builds.
   const handleSubmit = async (e) => {
     e.preventDefault()
     setSending(true)
     setStatus('')
     try {
       const { default: emailjs } = await import('@emailjs/browser')
-      await emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formRef.current, 'YOUR_PUBLIC_KEY')
+      await emailjs.sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      )
       setStatus('success')
       formRef.current.reset()
     } catch {
@@ -208,7 +216,7 @@ export default function Contact() {
 
         {/* Right — form */}
         <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Field label="Name"  id="cf-name"  name="from_name" placeholder="Your name"        required />
             <Field label="Email" id="cf-email" name="reply_to"  type="email" placeholder="your@email.com" required />
           </div>
@@ -220,8 +228,8 @@ export default function Contact() {
             <Send size={14} />
             {sending ? 'Sending…' : 'Send Message'}
           </RevealButton>
-          {status === 'success' && <p className="text-sm text-cta">Message sent!</p>}
-          {status === 'error'   && <p className="text-sm text-red-500">Something went wrong. Try emailing directly.</p>}
+          {status === 'success' && <p className="text-sm text-cta">Message sent — thanks for reaching out!</p>}
+          {status === 'error'   && <p className="text-sm text-destructive">Something went wrong. Try emailing me directly at bryshenders@gmail.com.</p>}
         </form>
       </div>
     </section>

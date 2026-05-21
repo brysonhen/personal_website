@@ -81,7 +81,7 @@ export function AnimatedThemeToggler({ sound = true, className = '' }) {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.86 }}
       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-      className={`relative inline-flex items-center justify-center rounded-lg p-2 text-foreground/85 hover:text-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring ${className}`}
+      className={`relative inline-flex items-center justify-center rounded-md p-2 text-foreground/85 hover:text-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring ${className}`}
       aria-label="Toggle theme"
     >
       <motion.svg

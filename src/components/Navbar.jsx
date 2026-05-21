@@ -34,7 +34,7 @@ export default function Navbar() {
       <button
         type="button"
         onClick={() => setMobileOpen(v => !v)}
-        className="md:hidden absolute top-5 right-5 z-20 p-2 pointer-events-auto backdrop-blur-md bg-bg/40 rounded-md"
+        className="md:hidden absolute top-5 right-5 z-20 p-2 pointer-events-auto bg-bg border border-border rounded-md"
         aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
       >
         <div className={`w-6 h-0.5 bg-foreground mb-1.5 transition-transform duration-300 ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`} />
@@ -48,8 +48,8 @@ export default function Navbar() {
           ${mobileOpen ? 'flex' : 'hidden md:flex'}
         `}
       >
-        {/* Only this pill gets the blur + bg — not the whole top bar */}
-        <ul className="pointer-events-auto flex flex-col items-center gap-4 rounded-full border border-border/60 bg-bg/40 backdrop-blur-md shadow-[0_4px_24px_-8px_rgba(0,0,0,0.4)] px-3 py-2 md:flex-row md:gap-1 lg:gap-2">
+        {/* Floating nav bar — square corners so the rectangular hover effect on each link sits flush */}
+        <ul className="pointer-events-auto flex flex-col items-center gap-4 rounded-md border border-border bg-bg shadow-lg px-2 py-1.5 md:flex-row md:gap-1 lg:gap-2">
           {links.map(({ href, label }) => (
             <li key={href} className="list-none">
               <a

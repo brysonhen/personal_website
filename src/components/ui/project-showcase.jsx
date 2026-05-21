@@ -62,7 +62,7 @@ export function ProjectShowcase() {
     >
       {/* Floating image preview */}
       <div
-        className="pointer-events-none absolute z-50 overflow-hidden rounded-xl shadow-2xl"
+        className="pointer-events-none absolute z-50 overflow-hidden rounded-md shadow-lg"
         style={{
           transform: `translate3d(${smoothPosition.x + 24}px, ${smoothPosition.y - 110}px, 0)`,
           opacity: isVisible ? 1 : 0,

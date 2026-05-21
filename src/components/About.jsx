@@ -70,7 +70,7 @@ function IntroBody({ inverted, daysLeft, unit, display, onToggle }) {
   return (
     <div className={`p-7 flex flex-col gap-6 h-full ${inverted ? 'bg-foreground/80' : 'bg-surface'}`}>
       <p className={`text-[17px] leading-[1.8] ${inverted ? 'text-primary-foreground/85' : 'text-foreground/80'}`}>
-        I'm a junior at Ole Miss studying Computer Science with a Data Science emphasis. I love building things and solving problems, and I'm working toward a career in data science. Right now I'm looking for internships and opportunities where I can learn and actually make a difference.
+        Junior at Ole Miss studying Computer Science with a Data Science emphasis. Currently looking for software engineering and data science internships for summer 2026.
       </p>
       <div className="flex flex-wrap gap-x-7 gap-y-4 mt-auto">
         <div className="flex items-center gap-3.5">
@@ -109,8 +109,8 @@ export default function About() {
 
       <div className="grid gap-4 about-bento">
         {/* Photo */}
-        <div className="rounded-[22px] overflow-hidden border border-border bg-surface group cursor-pointer aspect-[4/5] md:aspect-auto h-full" style={{ gridArea: 'profile' }}>
-          <img src={headshot} alt="Bryson Henderson" className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" />
+        <div className="rounded-2xl overflow-hidden border border-border bg-surface aspect-[4/5] md:aspect-auto h-full" style={{ gridArea: 'profile' }}>
+          <img src={headshot} alt="Bryson Henderson" className="w-full h-full object-cover object-top" />
         </div>
 
         {/* Intro — now with reveal */}
@@ -118,7 +118,7 @@ export default function About() {
           <RevealCardContainer
             accent="#262626"
             origin="0px 0px"
-            className="w-full h-full rounded-[22px]"
+            className="w-full h-full rounded-2xl"
             base={<IntroBody inverted={false} daysLeft={daysLeft} unit={unit} display={display} onToggle={() => setShowWeeks(v => !v)} />}
             overlay={<IntroBody inverted={true}  daysLeft={daysLeft} unit={unit} display={display} onToggle={() => setShowWeeks(v => !v)} />}
           />
@@ -129,7 +129,7 @@ export default function About() {
           <RevealCardContainer
             accent="#262626"
             origin="0px 0px"
-            className="w-full h-full rounded-[22px]"
+            className="w-full h-full rounded-2xl"
             base={
               <div className="bg-surface p-7 flex flex-col gap-4 h-full">
                 <span className="text-[22px] font-bold tracking-tight text-foreground">Get To Know Me</span>
@@ -155,7 +155,7 @@ export default function About() {
           <RevealCardContainer
             accent="#262626"
             origin="0px 0px"
-            className="w-full h-full rounded-[22px]"
+            className="w-full h-full rounded-2xl"
             base={<GithubBody inverted={false} />}
             overlay={<GithubBody inverted={true} />}
           />
