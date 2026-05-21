@@ -38,9 +38,9 @@ export default function Hero() {
       </motion.div>
 
       <motion.a href="#about" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}
-        className="absolute bottom-14 right-10 md:right-16 flex flex-col items-center gap-2 text-muted group cursor-pointer">
-        <span className="text-[10px] font-semibold tracking-[3px] uppercase opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200">SCROLL</span>
-        <ArrowDown size={18} className="animate-bounce" />
+        className="absolute bottom-14 right-10 md:right-16 flex flex-col items-center gap-2 text-muted hover:text-foreground transition-colors duration-200 group cursor-pointer">
+        <span className="text-[10px] font-semibold tracking-[3px] uppercase opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200">Scroll</span>
+        <ArrowDown size={18} />
       </motion.a>
     </section>
   )

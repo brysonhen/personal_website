@@ -1,4 +1,3 @@
-import { useRef, useState, useCallback } from 'react'
 import { SectionHeading } from '../About'
 
 const categories = [
@@ -46,7 +45,7 @@ const categories = [
 
 function SkillCard({ name, icon, invert = false }) {
   return (
-    <div className="group flex items-center gap-3 px-3 py-3 rounded-xl border border-border bg-surface cursor-default transition-colors duration-200 hover:border-foreground/30">
+    <div className="flex items-center gap-3 px-3 py-3 rounded-2xl border border-border bg-surface transition-colors duration-200 hover:border-ring">
       <img
         src={`https://api.iconify.design/${icon}.svg`}
         alt={name}
@@ -62,59 +61,26 @@ function SkillCard({ name, icon, invert = false }) {
 }
 
 export default function Skills() {
-  const containerRef = useRef(null)
-  const [tilt, setTilt] = useState({ x: 0, y: 0 })
-
-  const handleMouseMove = useCallback((e) => {
-    const el = containerRef.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    const nx = (e.clientX - rect.left) / rect.width - 0.5
-    const ny = (e.clientY - rect.top) / rect.height - 0.5
-    setTilt({ x: ny * -2.5, y: nx * 2.5 })
-  }, [])
-
-  const handleMouseLeave = useCallback(() => {
-    setTilt({ x: 0, y: 0 })
-  }, [])
-
   return (
     <section id="skills" className="w-full px-10 md:px-16 pt-32 pb-20">
       <SectionHeading top="SKILLS" ghost="Tech stack" />
 
-      <div
-        ref={containerRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className="relative mt-8 max-w-6xl mx-auto"
-        style={{ perspective: '2000px' }}
-      >
-        {/* Subtle 3D parallax tilt only — no spotlight overlay */}
-        <div
-          className="relative flex flex-col gap-7 transition-transform duration-300 ease-out"
-          style={{
-            transformStyle: 'preserve-3d',
-            transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-          }}
-        >
-          {categories.map(cat => (
-            <div key={cat.title}>
-              {/* Category header */}
-              <div className="flex items-baseline gap-4 mb-3">
-                <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-muted shrink-0">
-                  {cat.title}
-                </span>
-                <span className="flex-1 h-px bg-border" aria-hidden="true" />
-              </div>
-              {/* Denser grid: horizontal cards instead of square */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
-                {cat.skills.map(skill => (
-                  <SkillCard key={skill.name} {...skill} />
-                ))}
-              </div>
+      <div className="mt-8 max-w-6xl mx-auto flex flex-col gap-7">
+        {categories.map(cat => (
+          <div key={cat.title}>
+            <div className="flex items-baseline gap-4 mb-3">
+              <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-muted shrink-0">
+                {cat.title}
+              </span>
+              <span className="flex-1 h-px bg-border" aria-hidden="true" />
             </div>
-          ))}
-        </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+              {cat.skills.map(skill => (
+                <SkillCard key={skill.name} {...skill} />
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   )

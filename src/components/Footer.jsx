@@ -28,9 +28,6 @@ export default function Footer() {
             <div className="text-[clamp(28px,3vw,40px)] font-bold tracking-[-0.03em] leading-none text-foreground mb-2">
               Bryson Henderson
             </div>
-            <p className="text-sm text-muted leading-relaxed max-w-sm">
-              CS &amp; Data Science student at Ole Miss.
-            </p>
           </div>
 
           {/* Quick nav */}

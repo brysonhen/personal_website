@@ -11,7 +11,6 @@ import Skills from './components/ui/sticky-scroll'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import AnimatedLoadingSkeleton from './components/ui/animated-loading-skeleton'
-import FlowArt, { FlowSection } from './components/ui/story-scroll'
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -53,15 +52,15 @@ function App() {
       >
         <div id="grain" aria-hidden="true" />
         <Navbar />
-        <FlowArt>
-          <FlowSection aria-label="Home"><Hero /></FlowSection>
-          <FlowSection aria-label="About"      from="bl"><About /></FlowSection>
-          <FlowSection aria-label="Projects"   from="br"><Projects /></FlowSection>
-          <FlowSection aria-label="Education"  from="tl"><Education /></FlowSection>
-          <FlowSection aria-label="Experience" from="tr"><Experience /></FlowSection>
-          <FlowSection aria-label="Skills"     from="bl"><Skills /></FlowSection>
-          <FlowSection aria-label="Contact"    from="br"><Contact /></FlowSection>
-        </FlowArt>
+        <main>
+          <Hero />
+          <About />
+          <Projects />
+          <Education />
+          <Experience />
+          <Skills />
+          <Contact />
+        </main>
         <Footer />
       </div>
     </>

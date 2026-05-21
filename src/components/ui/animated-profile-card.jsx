@@ -46,7 +46,7 @@ export const RevealCardContainer = forwardRef((
       onMouseEnter={reveal}
       onMouseLeave={conceal}
       style={{ '--accent-color': accent, borderColor: 'var(--accent-color)' }}
-      className={cn('relative overflow-hidden rounded-3xl border-2', className)}
+      className={cn('relative overflow-hidden rounded-2xl border-2', className)}
       {...rest}
     >
       {/* Base wrapper gets h-full so children using `h-full` (e.g. flex-grow charts) actually fill. */}
