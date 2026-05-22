@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react"
 import { ArrowUpRight } from "lucide-react"
 import inspectaiPreview from "../../assets/inspectai-preview.png"
 import soccerPreview from "../../assets/soccer-predictor-preview.png"
+import githubPreview from "../../assets/github-preview.png"
 
 const projects = [
   {
@@ -25,12 +26,11 @@ const projects = [
   {
     title: "More on GitHub",
     description: "The rest of my projects, experiments, and work in progress live on my GitHub.",
-    year: "—",
+    year: "",
     link: "https://github.com/brysonhen",
     github: "https://github.com/brysonhen",
     stack: [],
-    // Reliable code/dev Unsplash photo as the GitHub project preview
-    image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=800&auto=format&fit=crop&q=80",
+    image: githubPreview,
   },
 ]
 
@@ -142,9 +142,11 @@ export function ProjectShowcase() {
                   )}
                 </div>
 
-                <span className={`text-sm font-sans tabular-nums transition-colors duration-300 shrink-0 pt-2 ${hoveredIndex === index ? "text-primary" : "text-muted"}`}>
-                  {project.year}
-                </span>
+                {project.year && (
+                  <span className={`text-sm font-sans tabular-nums transition-colors duration-300 shrink-0 pt-2 ${hoveredIndex === index ? "text-primary" : "text-muted"}`}>
+                    {project.year}
+                  </span>
+                )}
               </div>
             </div>
           </a>
