@@ -44,7 +44,7 @@ export default function Education() {
           B.S. Computer Science
         </h3>
         <p className="text-base md:text-lg text-muted mt-3">
-          Data Science Emphasis &nbsp;·&nbsp; Minor in Mathematics
+          Data Science Emphasis
         </p>
 
         {/* Big stats band */}
