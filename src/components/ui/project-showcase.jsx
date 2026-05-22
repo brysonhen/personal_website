@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react"
 import { ArrowUpRight } from "lucide-react"
 import inspectaiPreview from "../../assets/inspectai-preview.png"
+import soccerPreview from "../../assets/soccer-predictor-preview.png"
 
 const projects = [
   {
@@ -11,6 +12,15 @@ const projects = [
     github: "https://github.com/JulienrBourgeois/Dorm-AI",
     stack: ["Next.js", "Firebase", "Node.js", "Vercel"],
     image: inspectaiPreview,
+  },
+  {
+    title: "Soccer Matchup Predictor",
+    description: "Machine-learning app that predicts home, draw, and away probabilities for Premier League fixtures from rolling team form, with strict no-leakage temporal validation.",
+    year: "2026",
+    link: "https://soccer-matchup-predictor.streamlit.app",
+    github: "https://github.com/brysonhen/soccer_matchup_predictor",
+    stack: ["Python", "scikit-learn", "pandas", "Streamlit"],
+    image: soccerPreview,
   },
   {
     title: "More on GitHub",
