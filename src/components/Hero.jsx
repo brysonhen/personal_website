@@ -3,6 +3,7 @@ import { ArrowDown } from 'lucide-react'
 import { GithubIcon } from './Icons'
 import { RevealButton } from './ui/reveal-button'
 import CanvasWaves from './ui/canvas-waves'
+import { handleAnchorClick } from '../lib/scroll-to'
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } }
 const item = { hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } } }
@@ -30,14 +31,14 @@ export default function Hero() {
 
         {/* CTAs */}
         <motion.div variants={item} className="flex flex-wrap gap-3">
-          <RevealButton as="a" href="#projects">View Projects</RevealButton>
+          <RevealButton as="a" href="#projects" onClick={handleAnchorClick}>View Projects</RevealButton>
           <RevealButton as="a" href="https://github.com/brysonhen" target="_blank" rel="noopener noreferrer">
             <GithubIcon size={14} /> GitHub
           </RevealButton>
         </motion.div>
       </motion.div>
 
-      <motion.a href="#about" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}
+      <motion.a href="#about" onClick={handleAnchorClick} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}
         className="absolute bottom-14 right-10 md:right-16 flex flex-col items-center gap-2 text-muted hover:text-foreground transition-colors duration-200 group cursor-pointer">
         <span className="text-[10px] font-semibold tracking-[3px] uppercase opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200">Scroll</span>
         <ArrowDown size={18} />

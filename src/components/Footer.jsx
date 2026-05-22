@@ -1,5 +1,6 @@
 import { ArrowUp, Mail } from 'lucide-react'
 import { GithubIcon, LinkedinIcon, InstagramIcon } from './Icons'
+import { handleAnchorClick } from '../lib/scroll-to'
 
 const navLinks = [
   { href: '#about',         label: 'About' },
@@ -39,6 +40,7 @@ export default function Footer() {
                 <li key={href}>
                   <a
                     href={href}
+                    onClick={handleAnchorClick}
                     className="text-sm text-foreground/80 hover:text-foreground transition-colors no-underline"
                   >
                     {label}
@@ -52,6 +54,7 @@ export default function Footer() {
           <div className="md:justify-self-end">
             <a
               href="#home"
+              onClick={handleAnchorClick}
               className="group inline-flex flex-col items-end gap-2 text-[10px] font-bold tracking-[0.3em] uppercase text-muted hover:text-foreground transition-colors no-underline"
               aria-label="Back to top"
             >

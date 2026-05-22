@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatedThemeToggler } from './ui/animated-theme-toggler'
+import { handleAnchorClick } from '../lib/scroll-to'
 
 const links = [
   { href: '#home',       label: 'Home' },
@@ -68,7 +69,7 @@ export default function Navbar() {
                 <a
                   href={href}
                   className="relative inline-block group select-none"
-                  onClick={() => setMobileOpen(false)}
+                  onClick={(e) => { handleAnchorClick(e); setMobileOpen(false) }}
                 >
                   <span className="
                     relative z-10 block uppercase font-sans font-semibold

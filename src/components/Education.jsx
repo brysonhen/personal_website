@@ -13,7 +13,7 @@ const coursework = [
   { name: 'Engineering Statistics',              note: 'Probability, distributions, hypothesis testing' },
 ]
 const honors = ["Dean's Honor Roll", "Chancellor's Honor Roll", 'Academic Scholarships']
-const involvement = ['Delta Psi Fraternity', 'Coding Club', 'Intramural Soccer']
+const involvement = ['Delta Psi Fraternity', 'Coding Club', 'Intramural Soccer', 'Volunteer Work']
 
 // Big inline stat — number large, label small underneath
 function Stat({ value, label }) {
