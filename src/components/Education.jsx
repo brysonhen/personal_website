@@ -1,25 +1,30 @@
 import { SectionHeading } from './About'
 
 const coursework = [
-  { label: 'Algorithm & Data Structure Analysis', tip: 'Sorting, trees, graphs, dynamic programming, complexity' },
-  { label: 'Data Science', tip: 'Exploratory analysis, visualization, ML fundamentals with Python' },
-  { label: 'Advanced Data Science', tip: 'ML models, statistical learning, real-world datasets' },
-  { label: 'Database Systems', tip: 'SQL, schema design, indexing, query optimization' },
-  { label: 'Software Design & Development', tip: 'OOP patterns, architecture, team-based development' },
-  { label: 'Operating Systems', tip: 'Processes, memory management, threading, scheduling' },
-  { label: 'Computer Organization & Assembly', tip: 'Hardware abstraction, memory hierarchy, x86 assembly' },
-  { label: 'Formal & Programming Languages', tip: 'Grammars, parsing, compilers, language theory' },
-  { label: 'Discrete Mathematics', tip: 'Logic, proofs, graph theory, combinatorics' },
-  { label: 'Engineering Statistics', tip: 'Probability, distributions, hypothesis testing' },
+  { name: 'Algorithm & Data Structure Analysis', note: 'Sorting, trees, graphs, dynamic programming, complexity' },
+  { name: 'Data Science',                        note: 'Exploratory analysis, visualization, ML fundamentals' },
+  { name: 'Advanced Data Science',               note: 'ML models, statistical learning, real-world datasets' },
+  { name: 'Database Systems',                    note: 'SQL, schema design, indexing, query optimization' },
+  { name: 'Software Design & Development',       note: 'OOP patterns, architecture, team-based development' },
+  { name: 'Operating Systems',                   note: 'Processes, memory management, threading, scheduling' },
+  { name: 'Computer Organization & Assembly',    note: 'Hardware abstraction, memory hierarchy, x86 assembly' },
+  { name: 'Formal & Programming Languages',      note: 'Grammars, parsing, compilers, language theory' },
+  { name: 'Discrete Mathematics',                note: 'Logic, proofs, graph theory, combinatorics' },
+  { name: 'Engineering Statistics',              note: 'Probability, distributions, hypothesis testing' },
 ]
 const honors = ["Dean's Honor Roll", "Chancellor's Honor Roll", 'Academic Scholarships']
 const involvement = ['Delta Psi Fraternity', 'Coding Club', 'Intramural Soccer']
 
-function StatBadge({ label, value }) {
+// Big inline stat — number large, label small underneath
+function Stat({ value, label }) {
   return (
-    <div className="flex-1 min-w-[110px] px-5 py-4 rounded-lg bg-bg border border-border">
-      <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-1.5">{label}</div>
-      <div className="text-2xl font-bold text-foreground tracking-tight">{value}</div>
+    <div className="flex-1 min-w-[90px]">
+      <div className="text-[clamp(34px,5vw,54px)] font-bold tracking-[-0.02em] text-foreground leading-none">
+        {value}
+      </div>
+      <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-muted mt-2">
+        {label}
+      </div>
     </div>
   )
 }
@@ -29,75 +34,69 @@ export default function Education() {
     <section id="education" className="px-10 md:px-16 pt-32 pb-20">
       <SectionHeading top="EDUCATION" ghost="Academic background" />
 
-      {/* Featured: Ole Miss */}
-      <div className="rounded-lg border border-border bg-surface p-8 md:p-10 mb-4">
-        <div className="flex flex-wrap items-start justify-between gap-6 mb-8">
-          <div>
-            <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-3">
-              University of Mississippi · Oxford, MS
-            </div>
-            <h3 className="text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-foreground leading-[1.05]">
-              B.S. Computer Science
-            </h3>
-            <p className="text-[15px] md:text-base text-muted mt-2">
-              Data Science Emphasis · Minor in Mathematics
-            </p>
+      {/* Credential block — one contained, formal card with hairline-divided sections */}
+      <div className="rounded-lg border border-border bg-surface p-8 md:p-12">
+        {/* Degree statement */}
+        <div className="text-[10px] font-bold tracking-[0.25em] uppercase text-muted mb-4">
+          University of Mississippi · Oxford, MS
+        </div>
+        <h3 className="text-[clamp(32px,5vw,56px)] font-bold tracking-[-0.03em] text-foreground leading-[1.03]">
+          B.S. Computer Science
+        </h3>
+        <p className="text-base md:text-lg text-muted mt-3">
+          Data Science Emphasis &nbsp;·&nbsp; Minor in Mathematics
+        </p>
+
+        {/* Big stats band */}
+        <div className="flex gap-6 md:gap-12 mt-10 pt-8 border-t border-border">
+          <Stat value="3.54" label="GPA" />
+          <Stat value="2027" label="Graduating" />
+          <Stat value="2023" label="Enrolled" />
+        </div>
+
+        {/* Coursework — course-catalog list, name + description */}
+        <div className="mt-10 pt-8 border-t border-border">
+          <div className="text-[10px] font-bold tracking-[0.25em] uppercase text-muted mb-6">
+            Relevant Coursework
           </div>
-          <div className="flex flex-wrap gap-2 md:gap-3">
-            <StatBadge label="GPA" value="3.54" />
-            <StatBadge label="Class" value="'27" />
-            <StatBadge label="Started" value="2023" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-5">
+            {coursework.map(c => (
+              <div key={c.name} className="flex flex-col border-l border-border pl-4">
+                <span className="text-[15px] font-semibold text-foreground leading-snug">{c.name}</span>
+                <span className="text-[13px] text-muted leading-snug mt-1">{c.note}</span>
+              </div>
+            ))}
           </div>
         </div>
 
-
-        {/* Knowledge grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr] gap-8">
+        {/* Honors + Involvement */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8 mt-10 pt-8 border-t border-border">
           <div>
-            <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-4">Relevant Coursework</div>
-            <div className="flex flex-wrap gap-2">
-              {coursework.map(c => (
-                <div key={c.label} className="relative group/chip">
-                  <span className="inline-block text-[12px] text-muted px-3 py-1.5 rounded-full bg-bg border border-border cursor-default hover:border-primary hover:text-foreground transition-colors duration-150">
-                    {c.label}
-                  </span>
-                  <div className="absolute bottom-[calc(100%+8px)] left-1/2 -translate-x-1/2 z-10 pointer-events-none opacity-0 group-hover/chip:opacity-100 transition-opacity duration-150">
-                    <div className="bg-bg border border-border rounded-md px-3 py-1.5 text-xs text-foreground whitespace-nowrap shadow-lg">{c.tip}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-4">Honors</div>
-            <ul className="flex flex-col gap-2.5">
+            <div className="text-[10px] font-bold tracking-[0.25em] uppercase text-muted mb-4">Honors</div>
+            <ul className="flex flex-col gap-2">
               {honors.map(h => (
-                <li key={h} className="text-sm text-foreground/85 leading-relaxed flex gap-2.5">
-                  <span className="text-muted/60 shrink-0">—</span>{h}
-                </li>
+                <li key={h} className="text-[15px] text-foreground/85">{h}</li>
               ))}
             </ul>
           </div>
-
           <div>
-            <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-4">Involvement</div>
-            <ul className="flex flex-col gap-2.5">
+            <div className="text-[10px] font-bold tracking-[0.25em] uppercase text-muted mb-4">Involvement</div>
+            <ul className="flex flex-col gap-2">
               {involvement.map(i => (
-                <li key={i} className="text-sm text-foreground/85 leading-relaxed flex gap-2.5">
-                  <span className="text-muted/60 shrink-0">—</span>{i}
-                </li>
+                <li key={i} className="text-[15px] text-foreground/85">{i}</li>
               ))}
             </ul>
           </div>
         </div>
       </div>
 
-      {/* High School — secondary line */}
-      <div className="rounded-lg border border-border bg-surface px-8 md:px-10 py-6 flex flex-wrap items-center justify-between gap-4">
+      {/* High school — quiet footnote */}
+      <div className="rounded-lg border border-border bg-surface px-8 md:px-12 py-6 mt-4 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <div className="text-[10px] font-bold tracking-[1.5px] uppercase text-muted mb-1">Madison Central High School · Madison, MS</div>
-          <div className="text-xl font-bold text-foreground">High School Diploma</div>
+          <div className="text-[10px] font-bold tracking-[0.25em] uppercase text-muted mb-1">
+            Madison Central High School · Madison, MS
+          </div>
+          <div className="text-lg font-bold text-foreground">High School Diploma</div>
         </div>
         <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-[13px] text-muted">
           <span>2019 – 2023</span>

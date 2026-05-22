@@ -32,59 +32,42 @@ export default function Experience() {
     <section id="experience" className="px-10 md:px-16 pt-32 pb-20">
       <SectionHeading top="EXPERIENCE" ghost="Work history" align="right" />
 
-      <div className="relative mt-12 max-w-5xl mx-auto">
-        {/* Vertical line — runs through the dots */}
-        <div className="absolute left-[5px] md:left-[7px] top-3 bottom-3 w-px bg-border" aria-hidden="true" />
-
-        <div className="flex flex-col gap-14">
-          {experience.map(exp => (
-            <div key={exp.role} className="relative pl-9 md:pl-12 group">
-              {/* Small dot marker — bg-ring around it visually breaks the line */}
-              <div
-                className="absolute left-0 top-3 w-[11px] h-[11px] md:w-[15px] md:h-[15px] rounded-full bg-foreground ring-4 ring-bg z-10 transition-colors duration-200 group-hover:bg-foreground/60"
-                aria-hidden="true"
-              />
-
-              {/* Card */}
-              <div className="rounded-lg border border-border bg-surface p-7 md:p-8 transition-colors duration-200 group-hover:border-ring">
-                <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
-                  <div>
-                    <h3 className="text-2xl md:text-[28px] font-bold text-foreground tracking-tight leading-tight">
-                      {exp.role}
-                    </h3>
-                    <p className="text-sm md:text-base text-muted mt-1.5">
-                      <span className="text-foreground/90 font-medium">{exp.company}</span>
-                      <span className="mx-2 opacity-40">·</span>
-                      {exp.location}
-                    </p>
-                  </div>
-                  <div className="text-[11px] font-bold tracking-[1.5px] uppercase text-muted pt-1.5 shrink-0">
-                    {exp.date}
-                  </div>
-                </div>
-
-                <ul className="flex flex-col gap-2.5 mt-5">
-                  {exp.bullets.map(b => (
-                    <li key={b} className="text-[14px] md:text-[15px] text-foreground/75 leading-relaxed pl-5 relative">
-                      <span className="absolute left-0 top-0 text-muted/60">—</span>
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-
-                {exp.skills && (
-                  <div className="flex flex-wrap gap-2 mt-6 pt-5 border-t border-border">
-                    {exp.skills.map(s => (
-                      <span key={s} className="text-[11px] font-semibold uppercase tracking-[1px] px-3 py-1 rounded-full bg-bg border border-border text-muted">
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
+      {/* Open résumé-style list — entries separated by full-width hairline rules,
+          matching the dividers used in Education and the section headings. */}
+      <div className="max-w-4xl mx-auto flex flex-col">
+        {experience.map((exp, i) => (
+          <div key={exp.role} className={i > 0 ? 'mt-16 pt-16 border-t border-border' : ''}>
+            {/* Date — prominent marker */}
+            <div className="text-[12px] font-bold tracking-[0.2em] uppercase text-foreground/90 mb-3">
+              {exp.date}
             </div>
-          ))}
-        </div>
+
+            {/* Role — the hero element */}
+            <h3 className="text-[clamp(32px,5vw,52px)] font-bold tracking-[-0.03em] text-foreground leading-[1.0]">
+              {exp.role}
+            </h3>
+            <p className="text-[15px] md:text-base text-muted mt-3">
+              <span className="text-foreground/90 font-medium">{exp.company}</span>
+              <span className="mx-2 opacity-40">·</span>
+              {exp.location}
+            </p>
+
+            {/* Bullets */}
+            <ul className="flex flex-col gap-3 mt-8 max-w-2xl">
+              {exp.bullets.map(b => (
+                <li key={b} className="text-[15px] text-foreground/75 leading-relaxed pl-5 relative">
+                  <span className="absolute left-0 top-0 text-muted/50">—</span>
+                  {b}
+                </li>
+              ))}
+            </ul>
+
+            {/* Skills — inline text */}
+            <div className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted mt-8">
+              {exp.skills.join('  ·  ')}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   )
