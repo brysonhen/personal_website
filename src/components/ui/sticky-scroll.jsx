@@ -51,7 +51,7 @@ function SkillCard({ name, icon, invert = false }) {
         alt={name}
         width={24}
         height={24}
-        className={`shrink-0 ${invert ? 'invert' : ''}`}
+        className={`shrink-0 ${invert ? 'dark:invert' : ''}`}
       />
       <span className="text-[13px] font-semibold text-foreground/90 truncate">
         {name}
