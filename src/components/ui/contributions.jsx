@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 import { ArrowUpRight } from 'lucide-react'
-import { useIsDark } from '../../lib/use-is-dark'
 import { GithubIcon } from '../Icons'
 
 // GitHub's own contribution palette — level 0 = none → level 4 = most.
-const LEVELS_DARK  = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353']
-const LEVELS_LIGHT = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39']
+// Used in both themes so the chart always reads like GitHub's graph.
+const LEVELS = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353']
 
 // Group the flat day list into GitHub-style week columns (Sun→Sat).
 function groupIntoWeeks(days) {
@@ -25,7 +24,6 @@ function groupIntoWeeks(days) {
 // Standalone contribution band — a compact, understated accent between sections.
 // Self-rendered heatmap with GitHub's real palette; scrolls on narrow screens.
 export default function Contributions() {
-  const isDark = useIsDark()
   const [weeks, setWeeks] = useState(null)
   const [total, setTotal] = useState(null)
 
@@ -42,8 +40,8 @@ export default function Contributions() {
     return () => { cancelled = true }
   }, [])
 
-  const levels = isDark ? LEVELS_DARK : LEVELS_LIGHT
-  const panelBg = isDark ? '#0d1117' : '#ffffff'
+  const levels = LEVELS
+  const panelBg = '#0d1117'
   const grid = weeks || Array.from({ length: 53 }, () => new Array(7).fill(null))
 
   return (
