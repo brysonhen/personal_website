@@ -18,7 +18,7 @@ export default function Hero() {
         <motion.header variants={item} className="mb-10 md:mb-12">
           <div className="flex items-center gap-4 mb-5">
             <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-muted shrink-0">
-              /
+              Welcome to my website
             </span>
             <span className="flex-1 h-px bg-border" aria-hidden="true" />
           </div>

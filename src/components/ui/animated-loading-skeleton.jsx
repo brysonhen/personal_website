@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-// Shimmer bar that pulses like the real shimmer effect
+// Shimmer bar that pulses to suggest content is loading
 function Bar({ w, h = 'h-3', delay = 0, rounded = 'rounded-full', className = '' }) {
   return (
     <motion.div
@@ -11,87 +11,49 @@ function Bar({ w, h = 'h-3', delay = 0, rounded = 'rounded-full', className = ''
   )
 }
 
-function Pill({ w, h = 'h-10', delay = 0 }) {
-  return (
-    <motion.div
-      className={`${h} ${w} rounded-full bg-surface`}
-      animate={{ opacity: [0.5, 1, 0.5] }}
-      transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut', delay }}
-    />
-  )
-}
-
+// Generic section skeleton — mirrors the universal layout every section shares
+// (small label + hairline rule + big title + content blocks), so it looks right
+// no matter where the page is reloaded.
 export default function AnimatedLoadingSkeleton() {
   return (
     <div className="fixed inset-0 z-[100] bg-bg overflow-hidden">
 
-      {/* Navbar pill — matches fixed top-5 centered pill */}
-      <div className="fixed top-5 inset-x-0 flex justify-center">
-        <motion.div
-          className="h-10 w-[420px] rounded-full bg-surface border border-border"
-          animate={{ opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-        />
+      {/* Navbar — centered row of link-sized bars */}
+      <div className="fixed top-0 inset-x-0 flex justify-center py-5">
+        <div className="flex items-center gap-4">
+          {['w-11', 'w-14', 'w-16', 'w-16', 'w-20', 'w-12', 'w-14'].map((w, i) => (
+            <Bar key={i} w={w} h="h-3" delay={i * 0.06} />
+          ))}
+        </div>
       </div>
 
-      {/* Hero — matches pt-[18vh] px-10 md:px-16 layout */}
-      <div className="pt-[18vh] px-10 md:px-16">
+      {/* Section body — matches px-10 md:px-16 pt-32 layout */}
+      <div className="pt-32 px-10 md:px-16">
 
-        {/* BRYSON / HENDERSON name blocks */}
-        <div className="leading-none mb-6">
-          <Bar
-            w="w-[clamp(260px,50vw,560px)]"
-            h="h-[clamp(52px,10vw,110px)]"
-            rounded="rounded-lg"
-            delay={0}
-          />
-          <div className="mt-3">
-            <Bar
-              w="w-[clamp(320px,62vw,680px)]"
-              h="h-[clamp(52px,10vw,110px)]"
-              rounded="rounded-lg"
-              delay={0.1}
-              className="bg-primary/20"
-            />
+        {/* Section heading — label + hairline rule */}
+        <div className="flex items-center gap-4 mb-5">
+          <Bar w="w-28" h="h-2.5" delay={0} />
+          <span className="flex-1 h-px bg-border" aria-hidden="true" />
+        </div>
+
+        {/* Big title */}
+        <Bar
+          w="w-[clamp(280px,55vw,620px)]"
+          h="h-[clamp(48px,9vw,110px)]"
+          rounded="rounded-lg"
+          delay={0.1}
+          className="mb-12 md:mb-16"
+        />
+
+        {/* Content blocks */}
+        <div className="flex flex-col gap-4 max-w-4xl">
+          <Bar w="w-full"  h="h-24" rounded="rounded-lg" delay={0.2} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Bar w="w-full" h="h-40" rounded="rounded-lg" delay={0.3} />
+            <Bar w="w-full" h="h-40" rounded="rounded-lg" delay={0.4} />
           </div>
         </div>
-
-        {/* Typing text line */}
-        <Bar w="w-64" h="h-5" delay={0.2} className="mb-9" />
-
-        {/* Stats row — "Ole Miss '27 · GPA 3.54 · Data Science · badge" */}
-        <div className="flex items-center gap-3 mb-10">
-          <Bar w="w-20" h="h-2.5" delay={0.25} />
-          <span className="text-border">·</span>
-          <Bar w="w-16" h="h-2.5" delay={0.3} />
-          <span className="text-border">·</span>
-          <Bar w="w-24" h="h-2.5" delay={0.35} />
-          <span className="text-border">·</span>
-          <motion.div
-            className="h-6 w-24 rounded-full bg-cta/10 border border-cta/30"
-            animate={{ opacity: [0.4, 0.8, 0.4] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
-          />
-        </div>
-
-        {/* CTA buttons */}
-        <div className="flex gap-3">
-          <motion.div
-            className="h-10 w-32 rounded-full bg-primary/25"
-            animate={{ opacity: [0.5, 0.9, 0.5] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut', delay: 0.45 }}
-          />
-          <Pill w="w-28" delay={0.5} />
-        </div>
       </div>
-
-      {/* Subtle dot grid — same as real Hero */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: 'radial-gradient(circle, rgba(59,130,246,0.05) 1px, transparent 1px)',
-        backgroundSize: '32px 32px',
-        WebkitMaskImage: 'radial-gradient(ellipse 70% 80% at 85% 30%, black 20%, transparent 65%)',
-        maskImage: 'radial-gradient(ellipse 70% 80% at 85% 30%, black 20%, transparent 65%)',
-      }} />
     </div>
   )
 }

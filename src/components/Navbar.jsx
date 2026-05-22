@@ -24,72 +24,86 @@ export default function Navbar() {
   }, [])
 
   return (
-    <nav
-      style={{ transformOrigin: 'top center' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none ${
-        scrolled ? 'scale-90 -translate-y-1 opacity-95' : 'scale-100 translate-y-0 opacity-100'
-      }`}
-    >
-      {/* Mobile hamburger — outside the pill, sits in the top-right corner */}
-      <button
-        type="button"
-        onClick={() => setMobileOpen(v => !v)}
-        className="md:hidden absolute top-5 right-5 z-20 p-2 pointer-events-auto bg-bg border border-border rounded-md"
-        aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-      >
-        <div className={`w-6 h-0.5 bg-foreground mb-1.5 transition-transform duration-300 ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`} />
-        <div className={`w-6 h-0.5 bg-foreground mb-1.5 transition-opacity duration-300 ${mobileOpen ? 'opacity-0' : ''}`} />
-        <div className={`w-6 h-0.5 bg-foreground transition-transform duration-300 ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`} />
-      </button>
-
+    <>
+      {/* Soft blur strip — strongest behind the nav, fades to nothing as it
+          moves down the page. No border, no hard edge. Sits outside the nav
+          element so the nav's scale-on-scroll doesn't distort it. */}
       <div
-        className={`
-          flex items-center justify-center w-full py-5
-          ${mobileOpen ? 'flex' : 'hidden md:flex'}
-        `}
+        aria-hidden="true"
+        className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-16 z-40 pointer-events-none backdrop-blur-[2px]"
+        style={{
+          WebkitMaskImage: 'radial-gradient(ellipse 75% 80% at 50% 40%, black 20%, transparent 70%)',
+          maskImage: 'radial-gradient(ellipse 75% 80% at 50% 40%, black 20%, transparent 70%)',
+        }}
+      />
+
+      <nav
+        style={{ transformOrigin: 'top center' }}
+        className={`fixed top-0 left-0 right-0 z-50 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          scrolled ? 'scale-90 -translate-y-1 opacity-95' : 'scale-100 translate-y-0 opacity-100'
+        }`}
       >
-        {/* Floating nav bar — square corners so the rectangular hover effect on each link sits flush */}
-        <ul className="pointer-events-auto flex flex-col items-center gap-4 rounded-md border border-border bg-bg/60 shadow-lg px-2 py-1.5 md:flex-row md:gap-1 lg:gap-2">
-          {links.map(({ href, label }) => (
-            <li key={href} className="list-none">
-              <a
-                href={href}
-                className="relative inline-block group select-none"
-                onClick={() => setMobileOpen(false)}
-              >
-                <span className="
-                  relative z-10 block uppercase font-sans font-semibold
-                  text-foreground transition-colors duration-300
-                  group-hover:text-primary-foreground
-                  text-base py-2 px-4
-                  md:text-sm md:py-2 md:px-3
-                  lg:text-base lg:py-2 lg:px-4
-                ">
-                  {label}
-                </span>
-                <span className="
-                  absolute inset-0 border-t-2 border-b-2 border-foreground
-                  scale-y-[2] opacity-0
-                  transition-all duration-300 origin-center
-                  group-hover:scale-y-100 group-hover:opacity-100
-                  pointer-events-none
-                " />
-                <span className="
-                  absolute top-[2px] left-0 w-full h-full bg-foreground
-                  scale-0 opacity-0
-                  transition-all duration-300 origin-top
-                  group-hover:scale-100 group-hover:opacity-100
-                  pointer-events-none
-                " />
-              </a>
+        {/* Mobile hamburger */}
+        <button
+          type="button"
+          onClick={() => setMobileOpen(v => !v)}
+          className="md:hidden absolute top-5 right-5 z-20 p-2 pointer-events-auto"
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+        >
+          <div className={`w-6 h-0.5 bg-foreground mb-1.5 transition-transform duration-300 ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`} />
+          <div className={`w-6 h-0.5 bg-foreground mb-1.5 transition-opacity duration-300 ${mobileOpen ? 'opacity-0' : ''}`} />
+          <div className={`w-6 h-0.5 bg-foreground transition-transform duration-300 ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+        </button>
+
+        <div
+          className={`
+            flex items-center justify-center w-full py-5
+            ${mobileOpen ? 'flex' : 'hidden md:flex'}
+          `}
+        >
+          {/* Nav items sit directly on the blur — no pill, no border */}
+          <ul className="pointer-events-auto flex flex-col items-center gap-4 px-2 py-1.5 md:flex-row md:gap-1 lg:gap-2">
+            {links.map(({ href, label }) => (
+              <li key={href} className="list-none">
+                <a
+                  href={href}
+                  className="relative inline-block group select-none"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <span className="
+                    relative z-10 block uppercase font-sans font-semibold
+                    text-foreground transition-colors duration-300
+                    group-hover:text-primary-foreground
+                    text-base py-2 px-4
+                    md:text-sm md:py-2 md:px-3
+                    lg:text-base lg:py-2 lg:px-4
+                  ">
+                    {label}
+                  </span>
+                  <span className="
+                    absolute inset-0 border-t-2 border-b-2 border-foreground
+                    scale-y-[2] opacity-0
+                    transition-all duration-300 origin-center
+                    group-hover:scale-y-100 group-hover:opacity-100
+                    pointer-events-none
+                  " />
+                  <span className="
+                    absolute top-[2px] left-0 w-full h-full bg-foreground
+                    scale-0 opacity-0
+                    transition-all duration-300 origin-top
+                    group-hover:scale-100 group-hover:opacity-100
+                    pointer-events-none
+                  " />
+                </a>
+              </li>
+            ))}
+            {/* Theme toggle */}
+            <li className="list-none md:ml-2">
+              <AnimatedThemeToggler />
             </li>
-          ))}
-          {/* Theme toggle — sits at the end of the nav items */}
-          <li className="list-none md:ml-2">
-            <AnimatedThemeToggler />
-          </li>
-        </ul>
-      </div>
-    </nav>
+          </ul>
+        </div>
+      </nav>
+    </>
   )
 }
