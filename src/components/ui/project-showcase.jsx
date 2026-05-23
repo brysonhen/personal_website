@@ -16,11 +16,11 @@ const projects = [
   },
   {
     title: "Soccer Matchup Predictor",
-    description: "Machine-learning app that predicts home, draw, and away probabilities for Premier League fixtures from rolling team form, with strict no-leakage temporal validation.",
+    description: "Web app that returns pre-match home, draw, and away probabilities for Premier League fixtures from each team's rolling form, with accuracy charts and a team map.",
     year: "2026",
-    link: "https://soccer-matchup-predictor.streamlit.app",
-    github: "https://github.com/brysonhen/soccer_matchup_predictor",
-    stack: ["Python", "scikit-learn", "pandas", "Streamlit"],
+    link: "https://footballpredictorweb.vercel.app",
+    github: "https://github.com/brysonhen/football_predictor_web",
+    stack: ["Next.js", "TypeScript", "Tailwind", "Vercel"],
     image: soccerPreview,
   },
   {
